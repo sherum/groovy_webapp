@@ -39,7 +39,7 @@
         </thead>
         <tbody>
         <tr *ngFor="let story of stories">
-          <td ><a (click)="select(story.id)">{{story.title}}</a></td>
+          <td *ngIf="story"><a (click)="select(story.id)">{{story.title}}</a></td>
         </tr>
         </tbody>
 
