@@ -1,1 +1,163 @@
-<p>story-list works!</p>
+<p>story-list works!</p><nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li>
+
+        <button class="btn btn-outline-primary  my-2" (click)="create()">New Story</button>
+      </li>
+      <li>
+      </li>
+    </ul>
+
+    <div class="d-flex">
+
+      <li class="nav-link">
+        <a class="btn btn-primary my-2" (click)="save()">Save</a>
+      </li>
+      <li class="nav-link">
+        <a class="btn btn-success my-2" (click)="sync()">Toggle Form</a>
+      </li>
+
+
+
+    </div>
+  </div>
+</nav>
+
+
+
+
+<div class="row">
+
+  <div class="col-md-2 ">
+    <div *ngIf="stories">
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+          <th>Title</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let story of stories">
+          <td *ngIf="story"><a (click)="select(story.id)">{{story.title}}</a></td>
+        </tr>
+        </tbody>
+
+      </table>
+
+    </div>
+  </div>
+
+  <div class="col-md-8">
+    <div *ngIf="story">
+      <app-story
+        [story]="story"
+      ></app-story>
+    </div>
+  </div>
+</div>
+
+<!--  <ul class="list-group list-group-horizontal my-2">-->
+<!--    <li-->
+<!--      *ngFor="let story of stories"-->
+<!--      class="list-group-item nav-link link-primary"-->
+<!--      [ngClass]="{active:story?.id == (selectedStory$ | async)?.id}"-->
+<!--      -->
+<!--    </li>-->
+<!--  </ul>-->
+
+
+
+
+<!--<div *ngIf="!showForm">-->
+<!--  <div class="container" *ngIf="selectedStory$ | async as story">-->
+
+<!--    <form ngForm>-->
+<!--      <div class="input-group mb-3">-->
+<!--        <div class="input-group-prepend">-->
+<!--          <span class="input-group-text" id="basic-title">Title:</span>-->
+<!--        </div>-->
+<!--        <input class="form-control col-md-8" type="text" name="title" id="title" [(ngModel)]="story.title"/>-->
+<!--      </div>-->
+
+<!--      <div class="input-group mb-3">-->
+<!--        <div class="input-group-prepend">-->
+<!--          <span class="input-group-text" id="basic-author">Author:</span>-->
+<!--        </div>-->
+<!--        <input class="form-control" type="text" name="author" id="author"  [(ngModel)]="story.author"/>-->
+<!--      </div>-->
+
+<!--      <div class="input-group mb-3">-->
+<!--        <div class="input-group-prepend">-->
+<!--          <span class="input-group-text" id="basic-genre">Genre:</span>-->
+<!--        </div>-->
+<!--        <input class="form-control" type="text" name="genre" id="genre" [(ngModel)]="story.genre"/>-->
+<!--      </div>-->
+
+<!--      <div class="row">-->
+<!--        <div class="input-group mb-3">-->
+<!--          <div class="input-group-prepend">-->
+<!--            <span class="input-group-text" id="basic-maguffin">Maguffin:</span>-->
+<!--          </div>-->
+<!--          <textarea class="form-control" name="maguffin" id="maguffin" [(ngModel)]="story.maguffin"></textarea>-->
+<!--        </div>-->
+
+<!--        <div class="input-group mb-3">-->
+<!--          <div class="input-group-prepend">-->
+<!--            <span class="input-group-text" id="basic-summary">Summary:</span>-->
+<!--          </div>-->
+<!--          <textarea class="form-control"  name="summary" id="summary" [(ngModel)]="story.summary"></textarea>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </form>-->
+<!--  </div>-->
+
+
+
+
+<!--</div>-->
+<!--<div class="container" >-->
+
+<!--  <form ngForm>-->
+<!--    <div class="input-group mb-3">-->
+<!--      <div class="input-group-prepend">-->
+<!--        <span class="input-group-text" id="new-title">Title:</span>-->
+<!--      </div>-->
+<!--      <input class="form-control col-md-8" type="text" name="title" id="es-title" [(ngModel)]="emptyStory.title"/>-->
+<!--    </div>-->
+
+<!--    <div class="input-group mb-3">-->
+<!--      <div class="input-group-prepend">-->
+<!--        <span class="input-group-text" id="new-author">Author:</span>-->
+<!--      </div>-->
+<!--      <input class="form-control" type="text" name="author" id="es-author"  [(ngModel)]="emptyStory.author"/>-->
+<!--    </div>-->
+
+<!--    <div class="input-group mb-3">-->
+<!--      <div class="input-group-prepend">-->
+<!--        <span class="input-group-text" id="new-genre">Genre:</span>-->
+<!--      </div>-->
+<!--      <input class="form-control" type="text" name="genre" id="es-genre" [(ngModel)]="emptyStory.genre"/>-->
+<!--    </div>-->
+
+<!--    <div class="row">-->
+<!--      <div class="input-group mb-3">-->
+<!--        <div class="input-group-prepend">-->
+<!--          <span class="input-group-text" id="new-maguffin">Maguffin:</span>-->
+<!--        </div>-->
+<!--        <textarea class="form-control" name="maguffin" id="es-maguffin" [(ngModel)]="emptyStory.maguffin"></textarea>-->
+<!--      </div>-->
+
+<!--      <div class="input-group mb-3">-->
+<!--        <div class="input-group-prepend">-->
+<!--          <span class="input-group-text" id="new-summary">Summary:</span>-->
+<!--        </div>-->
+<!--        <textarea class="form-control"  name="summary" id="es-summary" [(ngModel)]="emptyStory.summary"></textarea>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </form>-->
+<!--</div>-->
+
+
+<div class="alert alert-danger" *ngIf="errorMessages">{{errorMessages}}</div>
+
