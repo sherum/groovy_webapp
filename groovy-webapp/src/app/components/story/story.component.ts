@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {IStory} from "../../models/story.model";
 
 @Component({
   selector: 'app-story',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./story.component.css']
 })
 export class StoryComponent {
+  @Input() story: IStory | undefined;
 
 }
