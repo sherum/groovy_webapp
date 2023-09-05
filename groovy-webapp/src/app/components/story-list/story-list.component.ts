@@ -1,63 +1,60 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {IStory, newStory} from "../../models/story.model";
-import {catchError, combineLatest, EMPTY, map, merge, Observable, Subject, tap} from "rxjs";
+import{Component} from '@angular/core';
+import {IStory} from "../../models/story.model";
+//import {catchError, combineLatest, EMPTY, map, merge, Observable, Subject, tap} from "rxjs";
 import {StoryService} from "../../services/story.service";
 
 @Component({
   templateUrl: './story-list.component.html',
   styleUrls: ['./story-list.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
 
 })
 export class StoryListComponent {
 
   showForm = false;
-  story$ = this.storyService.selectedStory$;
+  story:IStory|undefined;
 
-  private errorMessageSubject = new Subject<string>();
-  errorMessages$ = this.errorMessageSubject.asObservable();
-
+  errorMessages= ""
 
 
+stories:IStory[]|undefined;
 
-  stories$ = this.storyService.storiesWithAdd$.pipe(
-    tap(data => console.log(JSON.stringify(data))),
-    catchError(err => {
-      this.errorMessageSubject.next(err);
-      return EMPTY;
-    })
-  );
+  // stories$ = this.storyService.storiesWithAdd$.pipe(
+  //   tap(data => console.log(JSON.stringify(data))),
+  //   catchError(err => {
+  //     this.errorMessageSubject.next(err);
+  //     return EMPTY;
+  //   })
+  // );
 
   constructor(private storyService:StoryService) {
+    this.storyService.getStories().subscribe(data =>
+    this.stories = data
+    );
   }
 
   save():void{
     // this.storyService.selectedStory$
     //   .subscribe(currentStory=>
     //     this.storyService.addStory(<IStory>currentStory));
-    this.story$.subscribe(sto => {
-      this.storyService.addStory(<IStory>sto);
-      console.log("Save pressed ", sto);
-    });
+    // this.story$.subscribe(sto => {
+    //   this.storyService.addStory(<IStory>sto);
+    //   console.log("Save pressed ", sto);
+    // });
   }
 
-  select(id:string|undefined){
-    if(id == "0" || undefined){
-      this.showForm = true;
-    }else{
-      let ID = id ? id : "0";
-      this.storyService.selectedStoryChanged(ID);
-      this.showForm = false;
-    }
-    console.log("Show form: ", this.showForm)
-    console.log("Id ",id);
+  select(id:string){
+   // @ts-ignore
+    this.story = this.stories.find(story => story.id == id);
+    // }
+    // console.log("Show form: ", this.showForm)
+    // console.log("Id ",id);
   }
 
   create():void{
-    this.storyService.newStory();
+   // this.storyService.newStory();
   }
   sync():void{
-    this.showForm = !this.showForm;
+  /// this.showForm = !this.showForm;
   }
 
 }

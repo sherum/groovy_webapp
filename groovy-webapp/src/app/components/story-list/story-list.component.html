@@ -30,7 +30,7 @@
 <div class="row">
 
   <div class="col-md-2 ">
-    <div *ngIf="stories$ | async as stories">
+    <div *ngIf="stories">
       <table class="table table-bordered">
         <thead>
         <tr>
@@ -49,7 +49,7 @@
   </div>
 
   <div class="col-md-8">
-    <div *ngIf="story$ | async as story">
+    <div *ngIf="story">
       <app-story
         [story]="story"
       ></app-story>
@@ -159,5 +159,5 @@
 <!--</div>-->
 
 
-<div class="alert alert-danger" *ngIf="errorMessages$ | async as errorMessage">{{errorMessage}}</div>
+<div class="alert alert-danger" *ngIf="errorMessages">{{errorMessages}}</div>
 
