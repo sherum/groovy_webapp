@@ -11,6 +11,7 @@ import { HomeComponent } from './components/home/home.component';
 import { StoryComponent } from './components/story/story.component';
 import { StoryListComponent } from './components/story-list/story-list.component';
 import {SharedModule} from "./shared/shared.module";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import {SharedModule} from "./shared/shared.module";
   imports: [
     BrowserModule,
     SharedModule,
+    FormsModule,
     AppRoutingModule
   ],
   providers: [],
