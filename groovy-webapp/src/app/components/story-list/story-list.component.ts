@@ -38,12 +38,12 @@ stories:IStory[]|undefined;
   }
 
   select(id:string){
-   // @ts-ignore
     console.log("Selected ID", id?id:null);
     this.story = this.stories?.find(story => story.id == id);
   }
 
   create():void{
+    this.storyService.newStory().subscribe(data=>this.story = data);
   }
 
   sync():void{

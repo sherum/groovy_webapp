@@ -18,7 +18,7 @@ export class UserTokenInterceptor implements HttpInterceptor {
     console.log(`UserTokenInterceptor - ${request.url}`);
 
     let req: HttpRequest<any> =request.clone({
-      setHeaders: {'X-User-Token':"danforth@gmail.com"}
+      setHeaders: {'X-User-Token':"sherum@gmail.com"}
     });
   return next.handle(req);
   }
