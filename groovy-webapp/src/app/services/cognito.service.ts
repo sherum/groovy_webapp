@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, of} from 'rxjs';
+import {BehaviorSubject, from, Observable, of} from 'rxjs';
 // @ts-ignore
 import {Amplify, Auth} from 'aws-amplify';
 import {environment} from "../environments/environments";
 import {Router} from "@angular/router";
+import {reportUnhandledError} from "rxjs/internal/util/reportUnhandledError";
 
 
 
@@ -80,6 +81,9 @@ export class CognitoService {
   public getUser(): Promise<any> {
     return Auth.currentUserInfo();
   }
+
+
+
 
   public updateUser(user: IUser): Promise<any> {
     return Auth.currentUserPoolUser()

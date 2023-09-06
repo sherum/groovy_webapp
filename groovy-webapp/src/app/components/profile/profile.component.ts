@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {CognitoService, IUser} from "../../services/cognito.service";
+import {StoryService} from "../../services/story.service";
 
 
 
@@ -23,6 +24,7 @@ export class ProfileComponent implements OnInit {
       .then((user: any) => {
         this.user = user.attributes;
       });
+
   }
 
   public update(): void {
@@ -35,5 +37,11 @@ export class ProfileComponent implements OnInit {
       this.loading = false;
     });
   }
+
+  public getUser():IUser{
+    return this.user;
+  }
+
+
 
 }

@@ -12,7 +12,8 @@ import { StoryComponent } from './components/story/story.component';
 import { StoryListComponent } from './components/story-list/story-list.component';
 import {SharedModule} from "./shared/shared.module";
 import {FormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClientModule,HTTP_INTERCEPTORS} from "@angular/common/http";
+import {UserTokenInterceptor} from "./services/user-token.interceptor";
 
 @NgModule({
   declarations: [
@@ -32,7 +33,9 @@ import {HttpClientModule} from "@angular/common/http";
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    {provide:HTTP_INTERCEPTORS,useClass:UserTokenInterceptor,multi:true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
