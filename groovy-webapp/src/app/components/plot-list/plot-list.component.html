@@ -1,0 +1,54 @@
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+      <li>
+
+        <a class="link link-success mx-2" (click)="create()">New Plot</a>
+      </li>
+
+      <li>
+        <a class="link link-primary mx-2" (click)="save()">Save</a>
+      </li>
+
+
+      <li>
+      </li>
+    </ul>
+
+    <div class="d-flex">
+
+
+    </div>
+  </div>
+</nav>
+
+
+
+  <div class="col-md-2 ">
+    <div *ngIf="plots">
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Parent Plot</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let plot of plots">
+          <td *ngIf="plot"><a (click)="select(plot.id)">{{plot.name}}</a></td>
+          <td>
+            <select class="form-control" name="parent" id="es-parent" [(ngModel)]="plot.id">
+
+              <option *ngFor="let plot of plots"
+                      [value]="plot.id">
+                {{plot.name}}
+              </option>
+            </select>
+          </td>
+        </tr>
+        </tbody>
+
+      </table>
+
+    </div>
+  </div>
