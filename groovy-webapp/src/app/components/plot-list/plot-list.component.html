@@ -37,7 +37,7 @@
         <tr *ngFor="let plot of plots">
           <td *ngIf="plot"><a (click)="select(plot.id)">{{plot.name}}</a></td>
           <td>
-            <select class="form-control" name="parent" id="es-parent" [(ngModel)]="plot.id">
+            <select class="form-control" name="parent" id="es-parent" (change)="setParent($event)">
 
               <option *ngFor="let plot of plots"
                       [value]="plot.id">
@@ -52,3 +52,4 @@
 
     </div>
   </div>
+
