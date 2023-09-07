@@ -42,12 +42,10 @@ export class StoryService {
       () => this.getStories().subscribe(data =>console.log("Update result",data))
     )
   }
-  getUser():void{
-    this.auth.getUser()
-      .then((user: any) => {
-        this.user = user.attributes.email;
-        console.log("ZONE MAN",this.user);
-      });
+
+  delete(id:string):Observable<any>{
+    let uri = this.getStoriesUri+`/${id}`;
+    return this.http.delete(uri,{headers:this.headers});
   }
 
 

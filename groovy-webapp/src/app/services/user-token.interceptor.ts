@@ -1,18 +1,25 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
   HttpInterceptor
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Observable} from 'rxjs';
+import {StoryService} from "./story.service";
 
 @Injectable()
 export class UserTokenInterceptor implements HttpInterceptor {
 
-  constructor() {}
+  constructor(private storyService: StoryService) {
+  }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return next.handle(request);
+    console.log(`UserTokenInterceptor - ${request.url}`);
+
+    let req: HttpRequest<any> =request.clone({
+      setHeaders: {'X-User-Token':"sherum@gmail.com"}
+    });
+  return next.handle(req);
   }
 }

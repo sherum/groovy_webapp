@@ -43,7 +43,28 @@ stories:IStory[]|undefined;
     this.story = this.stories?.find(story => story.id == id);
   }
 
+  delete(id:string):void{
+    console.log("Delete story with id of: ", id);
+    this.storyService.delete(id).subscribe(
+      (data:void) => {
+        // @ts-ignore
+        let idx:number = this.stories?.findIndex(story =>story.id == id);
+        this.stories?.splice(idx,1);
+       this.story = undefined;
+      },
+      (err:any)=>console.log(err)
+    );
+  }
+
   create():void{
+    this.storyService.newStory().subscribe(
+      data => {
+        this.stories?.push(data);
+        // @ts-ignore
+        this.select(data?.id);
+      },
+      (err:any)=>console.log("new Story error",err)
+    );
   }
 
   sync():void{
