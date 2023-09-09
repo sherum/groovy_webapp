@@ -15,6 +15,8 @@ import {FormsModule} from "@angular/forms";
 import {HttpClientModule,HTTP_INTERCEPTORS} from "@angular/common/http";
 import {UserTokenInterceptor} from "./services/user-token.interceptor";
 import { StoryDashboardComponent } from './components/story-dashboard/story-dashboard.component';
+import { PlotParentComponent } from './components/ploting/plot-parent/plot-parent.component';
+import { PlotChildComponent } from './components/ploting/plot-child/plot-child.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { StoryDashboardComponent } from './components/story-dashboard/story-dash
     HomeComponent,
     StoryComponent,
     StoryListComponent,
-    StoryDashboardComponent
+    StoryDashboardComponent,
+    PlotParentComponent,
+    PlotChildComponent
   ],
   imports: [
     BrowserModule,
