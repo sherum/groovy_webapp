@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {CognitoService} from "./cognito.service";
 import {Observable} from "rxjs";
 import {IPlot} from "../models/story.model";
+import {StoryService} from "./story.service";
 
 
 @Injectable({
@@ -11,7 +12,7 @@ import {IPlot} from "../models/story.model";
 export class PlotService {
 
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private storyService:StoryService) {
 
   }
 
@@ -30,7 +31,12 @@ export class PlotService {
   // }
 
   newPlot(): Observable<IPlot> {
-    return this.http.post<IPlot>(this.getPlotsUri, {}, {})
+    let storyId= this.storyService.currentStoryId;
+    console.log("New PLot CHeking storyId ",storyId);
+    let payload= "AAA"+storyId;
+    let uri= `${this.getPlotsUri}/new`;
+    return this.http.post<IPlot>(uri, payload,
+        {headers:this.headers});
   }
 
   updatePlot(plot: IPlot): void {
@@ -41,8 +47,8 @@ export class PlotService {
     )
   }
 
-  delete(id:string):Observable<any>{
-    let uri = this.getPlotsUri+`/${id}`;
+  delete(storyid:string,plotId:string):Observable<any>{
+    let uri = this.getPlotsUri+`/${storyid}/${plotId}`;
     return this.http.delete(uri,{headers:this.headers});
   }
 

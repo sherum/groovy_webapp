@@ -5,6 +5,8 @@ import {HomeComponent} from "./components/home/home.component";
 import {AboutComponent} from "./components/about/about.component";
 import {StoryListComponent} from "./components/story-list/story-list.component";
 import {ProfileComponent} from "./components/profile/profile.component";
+import {PlotComponent} from "./components/plot/plot.component";
+import {AltStoryListComponent} from "./components/alt-story-list/alt-story-list.component";
 
 const routes: Routes = [
   {
@@ -16,17 +18,29 @@ const routes: Routes = [
     component: AboutComponent
   },
   {
-    path: 'stories',
-    component: StoryListComponent
+    path: 'altstories',
+    component: AltStoryListComponent,
+    children:[
+      {
+        path: 'plots/:id',
+        component: PlotComponent,
+      },
+    ],
   },
   {
-    path: 'profile',
-    component: ProfileComponent,
+    path: 'stories',
+    component: StoryListComponent,
+      children:[
+          {
+              path: 'plots/:id',
+              component: PlotComponent,
+          },
+      ],
   },
-  // {
-  //   path: 'plots',
-  //   component: PlotsComponent,
-  // },
+  {
+      component: ProfileComponent,
+      path: 'profile'
+  },
   {
     path: 'signUp',
     component: SignUpComponent,

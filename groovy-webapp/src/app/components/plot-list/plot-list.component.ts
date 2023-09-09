@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 import {PlotService} from "../../services/plot.service";
 import {IPlot} from "../../models/story.model";
@@ -10,21 +10,28 @@ import {IPlot} from "../../models/story.model";
 })
 export class PlotListComponent {
 
+  @Input() storyId:string= "";
   plot:IPlot|undefined;
-  plots:IPlot[]|undefined;
+ @Input() plots:IPlot[]|undefined;
 
   constructor(private plotService:PlotService) {
   }
 
   create():void{
-    this.plotService.newPlot().subscribe(
-      data => {
-        this.plots?.push(data);
-        // @ts-ignore
-        this.select(data?.id);
-      },
-      (err:any)=>console.log("new Plot error",err)
-    );
+      if (this.storyId?.length <= 5) {
+         console.log("No story has been selected")
+      } else {
+          // @ts-ignore
+          this.plotService.newPlot().subscribe(
+              data => {
+                  this.plots?.push(data);
+                  console.log("the new Plot ", data);
+                  // @ts-ignore
+                  this.select(data?.id);
+              },
+              (err: any) => console.log("new Plot error", err)
+          );
+      }
   }
   save():void{
     console.log("save pressed")
@@ -34,7 +41,8 @@ export class PlotListComponent {
       this.plotService.updatePlot(currentPlot);
     }else{
       console.log("Not update happened")
-      let plot$ = this.plotService.newPlot();
+      // @ts-ignore
+        let plot$ = this.plotService.newPlot(this.storyId);
       (plot$).subscribe(data => this.plot = data);
     }
   }
@@ -42,7 +50,7 @@ export class PlotListComponent {
 
   delete(id:string):void{
     console.log("Delete plot with id of: ", id);
-    this.plotService.delete(id).subscribe(
+    this.plotService.delete(<string>this.storyId,id).subscribe(
       (data:void) => {
         // @ts-ignore
         let idx:number = this.plots?.findIndex(plot =>plot.id == id);
@@ -62,5 +70,5 @@ export class PlotListComponent {
     this.plot = this.plots?.find(plot => plot.id == id);
   }
 
-  protected readonly parent = parent;
+
 }

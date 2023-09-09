@@ -1,27 +1,26 @@
-import{Component} from '@angular/core';
+import { Component } from '@angular/core';
 import {IStory} from "../../models/story.model";
-//import {catchError, combineLatest, EMPTY, map, merge, Observable, Subject, tap} from "rxjs";
 import {StoryService} from "../../services/story.service";
 
 @Component({
-  templateUrl: './story-list.component.html',
-  styleUrls: ['./story-list.component.css'],
-
+  selector: 'app-alt-story-list',
+  templateUrl: './alt-story-list.component.html',
+  styleUrls: ['./alt-story-list.component.css']
 })
-export class StoryListComponent {
-
+export class AltStoryListComponent {
   story:IStory|undefined;
 
   errorMessages= ""
 
 
-stories:IStory[]|undefined;
+  stories:IStory[]|undefined;
 
 
   constructor(private storyService:StoryService) {
     this.storyService.getStories().subscribe(data =>
-    this.stories = data
+        this.stories = data
     );
+
   }
 
   save():void{
@@ -38,7 +37,7 @@ stories:IStory[]|undefined;
   }
 
   select(id:string){
-   // @ts-ignore
+    // @ts-ignore
     console.log("Selected ID", id?id:null);
     this.story = this.stories?.find(story => story.id == id);
     // @ts-ignore
@@ -48,29 +47,30 @@ stories:IStory[]|undefined;
   delete(id:string):void{
     console.log("Delete story with id of: ", id);
     this.storyService.delete(id).subscribe(
-      (data:void) => {
-        // @ts-ignore
-        let idx:number = this.stories?.findIndex(story =>story.id == id);
-        this.stories?.splice(idx,1);
-       this.story = undefined;
-      },
-      (err:any)=>console.log(err)
+        (data:void) => {
+          // @ts-ignore
+          let idx:number = this.stories?.findIndex(story =>story.id == id);
+          this.stories?.splice(idx,1);
+          this.story = undefined;
+        },
+        (err:any)=>console.log(err)
     );
   }
 
   sync():void{
-  /// this.showForm = !this.showForm;
+    /// this.showForm = !this.showForm;
   }
 
   create():void{
     this.storyService.newStory().subscribe(
-      data => {
-        this.stories?.push(data);
-        // @ts-ignore
-        this.select(data?.id);
-      },
-      (err:any)=>console.log("new story error",err)
+        data => {
+          this.stories?.push(data);
+          // @ts-ignore
+          this.select(data?.id);
+        },
+        (err:any)=>console.log("new story error",err)
     );
   }
 
 }
+

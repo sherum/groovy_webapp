@@ -1,0 +1,63 @@
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li>
+
+                <button class="btn btn-outline-primary  my-2" (click)="create()">New Story</button>
+            </li>
+            <li>
+            </li>
+        </ul>
+
+        <div class="d-flex">
+
+            <li class="nav-link">
+                <a class="btn btn-primary my-2" (click)="save()">Save</a>
+            </li>
+            <li class="nav-link">
+                <a class="btn btn-success my-2" (click)="sync()">Toggle Form</a>
+            </li>
+
+
+
+        </div>
+    </div>
+</nav>
+
+
+
+
+<div class="row">
+
+    <div class="col-md-3 ">
+        <div *ngIf="stories">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let story of stories">
+                    <td><a class="link-primary" (click)="select(story.id)">{{story.title}}</a></td>
+                    <td><a class="link-danger" (click)="delete(story.id)">Delete</a></td>
+                </tr>
+                </tbody>
+
+            </table>
+
+        </div>
+    </div>
+
+        <div *ngIf="story">
+    <div class="col-md-8">
+            <app-story
+                    [story]="story"
+            ></app-story>
+        </div>
+    </div>
+<div class="alert alert-danger" *ngIf="errorMessages">{{errorMessages}}</div>
+<app-story-dashboard
+    [story]="story"></app-story-dashboard>
+</div>

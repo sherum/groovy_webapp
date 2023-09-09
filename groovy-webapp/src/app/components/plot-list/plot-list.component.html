@@ -24,31 +24,26 @@
 
 
 
-  <div class="col-md-2 ">
-    <div *ngIf="plots">
-      <table class="table table-bordered">
-        <thead>
-        <tr>
-          <th>Name</th>
-          <th>Parent Plot</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let plot of plots">
-          <td *ngIf="plot"><a (click)="select(plot.id)">{{plot.name}}</a></td>
-          <td>
-            <select class="form-control" name="parent" id="es-parent" (change)="setParent($event)">
+  <div class="col-md-10 ">
+    <div *ngFor="let plot of plots">
+<!--      <table class="table table-bordered">-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--          <th>Name</th>-->
+<!--          <th>Parent Plot</th>-->
+<!--          <th>Delete</th>-->
 
-              <option *ngFor="let plot of plots"
-                      [value]="plot.id">
-                {{plot.name}}
-              </option>
-            </select>
-          </td>
-        </tr>
-        </tbody>
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+                <plot-list-view
+            [plot]="plot"
+            [plots]="plots"
+            (deleteMe)="delete($event)"></plot-list-view>
+<!--        </tr>-->
+<!--        </tbody>-->
 
-      </table>
+<!--      </table>-->
 
     </div>
   </div>

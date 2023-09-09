@@ -1,0 +1,27 @@
+<form #plotview=ngForm>
+  <label>{{plot?.id}}</label>
+  <div class="table-responsive-md">
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Parent Plot</th>
+      <th>Delete</th>
+
+    </tr>
+    </thead>
+    <tbody>
+  <tr>
+  <td><a class="link link-primary" [routerLink]="['plots',plot.id]"> {{plot?.name}} </a> </td>
+    <td>
+      <select class="form-control" *ngFor="let p of plots" name="parentId" id="parentId" [ngModel]="p.id">
+        <option [value]="p.id" >{{p.name}}</option>
+      </select>
+    </td>
+    <td><a class="link link-danger" (click)="delete()">Delete</a></td>
+  </tr>
+    </tbody>
+
+  </table>
+</div>
+</form>

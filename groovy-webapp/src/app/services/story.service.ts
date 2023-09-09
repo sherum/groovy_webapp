@@ -11,6 +11,7 @@ import {IStory, data, newStory} from "../models/story.model";
 export class StoryService {
 
   user:string|undefined;
+  currentStoryId:string|undefined;
 
   constructor(private http: HttpClient, private auth: CognitoService) {
 
@@ -21,6 +22,10 @@ export class StoryService {
   getStoriesUri = `${this.url}/story`
   headers = new HttpHeaders({'Content-Type': 'application/json', 'Accept': 'application/json'});
 
+
+  setCurrentStory(storyId:string):void{
+    this.currentStoryId = storyId;
+  }
 
   getStories():Observable<IStory[]>{
     return  this.http.get<IStory[]>(this.getStoriesUri, {headers: this.headers});

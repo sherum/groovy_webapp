@@ -16,6 +16,9 @@ import {HttpClientModule,HTTP_INTERCEPTORS} from "@angular/common/http";
 import {UserTokenInterceptor} from "./services/user-token.interceptor";
 import { PlotListComponent } from './components/plot-list/plot-list.component';
 import { PlotComponent } from './components/plot/plot.component';
+import { PlotListViewComponent } from './components/plot-list-view/plot-list-view.component';
+import { StoryDashboardComponent } from './components/story-dashboard/story-dashboard.component';
+import { AltStoryListComponent } from './components/alt-story-list/alt-story-list.component';
 
 
 @NgModule({
@@ -29,7 +32,10 @@ import { PlotComponent } from './components/plot/plot.component';
     StoryComponent,
     StoryListComponent,
     PlotListComponent,
-    PlotComponent
+    PlotComponent,
+    PlotListViewComponent,
+    StoryDashboardComponent,
+    AltStoryListComponent
   ],
   imports: [
     BrowserModule,
