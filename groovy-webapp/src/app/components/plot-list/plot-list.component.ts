@@ -1,13 +1,15 @@
 import {Component, Input} from '@angular/core';
-import {IPlot} from "../../../models/story.model";
-import {StoryService} from "../../../services/story.service";
+import {IPlot} from "../../models/story.model";
+import {StoryService} from "../../services/story.service";
 
 @Component({
-  selector: 'app-plot-parent',
-  templateUrl: './plot-parent.component.html',
-  styleUrls: ['./plot-parent.component.css']
+  selector: 'app-plot-list',
+  templateUrl: './plot-list.component.html',
+  styleUrls: ['./plot-list.component.css']
 })
-export class PlotParentComponent {
+export class PlotListComponent {
+
+
 
   @Input() plots:IPlot[]|undefined;
   plot:IPlot|undefined;

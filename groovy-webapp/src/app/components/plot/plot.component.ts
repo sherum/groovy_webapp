@@ -1,12 +1,12 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {IPlot} from "../../../models/story.model";
+import {IPlot} from "../../models/story.model";
 
 @Component({
-  selector: 'app-plot-child',
-  templateUrl: './plot-child.component.html',
-  styleUrls: ['./plot-child.component.css']
+  selector: 'app-plot',
+  templateUrl: './plot.component.html',
+  styleUrls: ['./plot.component.css']
 })
-export class PlotChildComponent {
+export class PlotComponent {
 
   @Input() plot:IPlot|undefined;
   @Input() plots:IPlot[]|undefined;
