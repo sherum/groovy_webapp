@@ -1,5 +1,5 @@
-import{Component} from '@angular/core';
-import {IStory} from "../../models/story.model";
+import {Component, OnInit} from '@angular/core';
+import {data, IStory} from "../../models/story.model";
 //import {catchError, combineLatest, EMPTY, map, merge, Observable, Subject, tap} from "rxjs";
 import {StoryService} from "../../services/story.service";
 
@@ -8,7 +8,9 @@ import {StoryService} from "../../services/story.service";
   styleUrls: ['./story-list.component.css'],
 
 })
-export class StoryListComponent {
+export class StoryListComponent implements  OnInit{
+
+
 
   story:IStory|undefined;
 
@@ -21,6 +23,11 @@ stories:IStory[]|undefined;
   constructor(private storyService:StoryService) {
     this.storyService.getStories().subscribe(data =>
     this.stories = data
+    );
+  }
+  ngOnInit(): void {
+    this.storyService.currentStoryObserver$.subscribe(
+        storyData => this.story = storyData
     );
   }
 
@@ -40,7 +47,8 @@ stories:IStory[]|undefined;
   select(id:string){
    // @ts-ignore
     console.log("Selected ID", id?id:null);
-    this.story = this.stories?.find(story => story.id == id);
+    let nextstory = this.stories?.find(story => story.id == id);
+    this.storyService.setCurrentStory(<IStory>nextstory);
   }
 
   delete(id:string):void{
