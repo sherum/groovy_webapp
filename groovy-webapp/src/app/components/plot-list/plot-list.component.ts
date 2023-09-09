@@ -1,41 +1,47 @@
 import {Component, Input} from '@angular/core';
 import {IPlot} from "../../models/story.model";
 import {StoryService} from "../../services/story.service";
+import {combineLatest, Subject} from "rxjs";
 
 @Component({
-  selector: 'app-plot-list',
-  templateUrl: './plot-list.component.html',
-  styleUrls: ['./plot-list.component.css']
+    selector: 'app-plot-list',
+    templateUrl: './plot-list.component.html',
+    styleUrls: ['./plot-list.component.css']
 })
 export class PlotListComponent {
 
+    // private selectedStoryPlot = new Subject<IPlot>;
+    // selectedPlots$ = this.selectedStoryPlot.asObservable();
+
+    plots:IPlot[]|undefined;
 
 
-  @Input() plots:IPlot[]|undefined;
-  plot:IPlot|undefined;
 
-  constructor(private storyService:StoryService) {
-    this.storyService.currentStoryObserver$.subscribe(
-        storyData=>{
-          let plots = storyData.plots
-        }
-    )
-  }
-
-
-  create():void{
-
-  }
-  save(){
-
-  }
+    constructor(private storyService: StoryService) {
+        this.storyService.currentStoryObserver$.subscribe(
+            story => {
+                this.plots = story.plots;
+                console.log("the story", story);
+                console.log("the plots", this.plots);
+                }
+        );
+    }
 
 
-  delete():void{
+    create(): void {
 
-  }
+    }
 
-  selectPlot(plot:IPlot):void{
-    this.plot = plot;
-  }
+    save() {
+
+    }
+
+
+    delete(): void {
+
+    }
+
+    selectPlot(plot: IPlot): void {
+       // this.plot = plot;
+    }
 }
