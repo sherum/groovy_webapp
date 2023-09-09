@@ -30,7 +30,7 @@
 <div class="row">
 
   <div class="col-md-3 ">
-    <div *ngIf="stories">
+    <div *ngIf="stories$">
       <table class="table table-bordered">
         <thead>
         <tr>
@@ -39,9 +39,9 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let story of stories">
-          <td><a class="link-primary" (click)="select(story.id)">{{story.title}}</a></td>
-          <td><a class="link-danger" (click)="delete(story.id)">Delete</a></td>
+        <tr *ngFor="let story of stories$|async">
+          <td><a class="link-primary" (click)="select(story)">{{story.title}}</a></td>
+          <td><a class="link-danger" (click)="delete(story)">Delete</a></td>
         </tr>
         </tbody>
 

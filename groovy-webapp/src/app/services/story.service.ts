@@ -20,6 +20,8 @@ export class StoryService {
   url = "http://localhost:8080";
   getStoriesUri = `${this.url}/story`
   headers = new HttpHeaders({'Content-Type': 'application/json', 'Accept': 'application/json'});
+
+
   private currentStorySubject = new Subject<IStory>();
   currentStoryObserver$ = this.currentStorySubject.asObservable();
 
