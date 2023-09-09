@@ -16,6 +16,13 @@ export class StoryService {
 
   }
 
+  private currentStorySubject = new Subject<IStory>();
+  currentStoryObserver$ = this.currentStorySubject.asObservable();
+
+
+  setCurrentStory(story:IStory):void{
+    this.currentStorySubject.next(story);
+  }
 
   url = "http://localhost:8080";
   getStoriesUri = `${this.url}/story`

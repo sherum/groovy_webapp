@@ -1,4 +1,4 @@
-import{Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {IStory} from "../../models/story.model";
 //import {catchError, combineLatest, EMPTY, map, merge, Observable, Subject, tap} from "rxjs";
 import {StoryService} from "../../services/story.service";
@@ -8,7 +8,7 @@ import {StoryService} from "../../services/story.service";
   styleUrls: ['./story-list.component.css'],
 
 })
-export class StoryListComponent {
+export class StoryListComponent implements OnInit{
 
   story:IStory|undefined;
 
@@ -24,23 +24,24 @@ stories:IStory[]|undefined;
     );
   }
 
+  ngOnInit(): void {
+        this.storyService.currentStoryObserver$.subscribe(
+          storyData => this.story = storyData,
+          err =>console.log("Error",err),
+          ()=>console.log("StorySelected")
+        );
+    }
+
   save():void{
     console.log("save pressed")
-    let currentStory = <IStory>this.story;
-    if(currentStory.id){
-      console.log("Update happened")
-      this.storyService.updateStory(currentStory);
-    }else{
-      console.log("Not update happened")
-      let story$ = this.storyService.newStory();
-      (story$).subscribe(data => this.story = data);
-    }
+      this.storyService.updateStory(<IStory>this.story);
   }
 
   select(id:string){
    // @ts-ignore
     console.log("Selected ID", id?id:null);
-    this.story = this.stories?.find(story => story.id == id);
+   let nextStory =  this.stories?.find(story => story.id == id);
+    this.storyService.setCurrentStory(<IStory>nextStory);
   }
 
   delete(id:string):void{
