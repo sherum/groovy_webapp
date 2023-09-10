@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core';
 import {IPlot} from "../../models/story.model";
 import {StoryService} from "../../services/story.service";
 import {combineLatest, Subject} from "rxjs";
+import {PlotService} from "../../services/plot.service";
 
 @Component({
     selector: 'app-plot-list',
@@ -10,15 +11,14 @@ import {combineLatest, Subject} from "rxjs";
 })
 export class PlotListComponent {
 
-    // private selectedStoryPlot = new Subject<IPlot>;
-    // selectedPlots$ = this.selectedStoryPlot.asObservable();
 
     plots:IPlot[]|undefined;
+    plot$ = this.plotService.selectedPlots$;
 
 
 
-    constructor(private storyService: StoryService) {
-        this.storyService.currentStoryObserver$.subscribe(
+    constructor(private plotService:PlotService) {
+        this.plotService.selctedStory$.subscribe(
             story => {
                 this.plots = story.plots;
                 console.log("the story", story);
@@ -41,7 +41,8 @@ export class PlotListComponent {
 
     }
 
-    selectPlot(plot: IPlot): void {
-       // this.plot = plot;
+    selectedPlot(plot:IPlot){
+
     }
+
 }
