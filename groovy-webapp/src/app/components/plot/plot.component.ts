@@ -41,8 +41,16 @@ export class PlotComponent implements OnInit {
     // );
   }
 
-  deletePlot(): void {
-    // this.delete.emit(this.plot);
+  deletePlot(plot:IPlot): void {
+    console.log("Plot delete pressed");
+    let storyId =<string> this.currentStory.id
+    let plotId = <string>plot.id;
+    // this.plot$.subscribe(data => {
+    //     plotId = <string>data.id;
+    //     console.log("Delting plot ID: ",plotId);
+    // });
+    this.plotService.deletePlot(storyId, plotId);
+    console.log("Deleteplot after")
   }
 
 

@@ -43,6 +43,9 @@ export class PlotListComponent implements OnInit {
 
   create(): void {
 
+    this.plotService.newPlot(this.story).subscribe(
+      data => this.selectPlot(data)
+    )
   }
 
   save() {
