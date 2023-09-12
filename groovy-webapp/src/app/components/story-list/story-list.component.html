@@ -66,4 +66,6 @@
 
 <hr>
 
-<app-story-dashboard *ngIf="story"></app-story-dashboard>
+<app-story-dashboard *ngIf="story"
+[currentStory]="story"
+></app-story-dashboard>

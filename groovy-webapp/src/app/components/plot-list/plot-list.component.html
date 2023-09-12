@@ -32,6 +32,6 @@
     </div>
 </div>
 <div class="col">
-<app-plot></app-plot>
+<app-plot *ngIf="matchingPlot" [currentStory]="story"></app-plot>
 </div>
 </div>

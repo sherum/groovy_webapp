@@ -21,11 +21,22 @@ export class PlotService {
         console.log("A new plot was chosen",plot);
     }
 
-    private selectedPlotList = new Subject<IPlot[]>();
+  /**
+   * Not sure why I think I need this.
+   * @private
+   */
+  private selectedPlotList = new Subject<IPlot[]>();
     currentPlotList$ = this.selectedPlotList.asObservable()
 
     updatePlotList(plot:IPlot[]):void{
 
       this.selectedPlotList.next(plot);
+    }
+
+    private storySavePlot = new Subject<IPlot>();
+    insertedSavePlot$ = this.storySavePlot.asObservable();
+
+    updateSavePlot(plot:IPlot):void{
+      this.storySavePlot.next(plot);
     }
 }

@@ -8,38 +8,41 @@ import {map, merge, scan} from "rxjs";
   templateUrl: './plot.component.html',
   styleUrls: ['./plot.component.css']
 })
-export class PlotComponent implements OnInit{
+export class PlotComponent implements OnInit {
 
   plot$ = this.plotService.selectedPlots$
-  plots:IPlot[]|undefined;
+  plots: IPlot[] | undefined;
   story$ = this.plotService.selctedStory$;
+  // @ts-ignore
+  @Input() currentStory:IStory;
 
 
-
-
-  constructor(private plotService:PlotService) {
+  constructor(private plotService: PlotService) {
   }
+
   ngOnInit(): void {
-    this.story$.pipe(
-      map((story) => this.plots = story.plots)
-    );
+    // this.story$.pipe(
+    //   map((story) => this.plots = story.plots)
+    // );
+    this.plots = this.currentStory.plots;
+
   }
 
 
-
-  savePlot():void{
-  merge(
-    this.story$,
-    this.plot$
-  ).pipe(
-    scan((story,plot) =>
-      (plot instanceof Array) ? [...plot] : [...story],
-      [] as IPlot[])
-  );
+  savePlot(plot:IPlot): void {
+    this.plotService.updateSavePlot(<IPlot>plot);
+    // merge(
+    //   this.story$,
+    //   this.plot$
+    // ).pipe(
+    //   scan((story, plot) =>
+    //       (plot instanceof Array) ? [...plot] : [...story],
+    //     [] as IPlot[])
+    // );
   }
 
-  deletePlot():void{
-   // this.delete.emit(this.plot);
+  deletePlot(): void {
+    // this.delete.emit(this.plot);
   }
 
 

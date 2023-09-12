@@ -1,48 +1,63 @@
-import {Component, Input} from '@angular/core';
-import {IPlot} from "../../models/story.model";
+import {Component, Input, OnInit} from '@angular/core';
+import {IPlot, IStory} from "../../models/story.model";
 import {StoryService} from "../../services/story.service";
 import {combineLatest, Subject} from "rxjs";
-import {PlotService} from "../../services/plot.service";
 
 @Component({
-    selector: 'app-plot-list',
-    templateUrl: './plot-list.component.html',
-    styleUrls: ['./plot-list.component.css']
+  selector: 'app-plot-list',
+  templateUrl: './plot-list.component.html',
+  styleUrls: ['./plot-list.component.css']
 })
-export class PlotListComponent {
+export class PlotListComponent implements OnInit {
 
 
-    plots:IPlot[]|undefined;
-    //plot$ = this.plotService.selectedPlots$;
+  // @ts-ignore
+  @Input() story: IStory;
+  plots: IPlot[] | undefined;
+  matchingPlot = false;
 
 
-
-    constructor(private plotService:PlotService) {
-        this.plotService.selctedStory$.subscribe(
-            story => {
-                this.plots = story.plots;
-                console.log("the story", story);
-                console.log("the plots", this.plots);
-                }
-        );
-    }
+  //plot$ = this.plotService.selectedPlots$;
 
 
-    create(): void {
+  constructor(private plotService: PlotService) {
 
-    }
+  }
 
-    save() {
+  ngOnInit(): void {
+    this.plotService.selctedStory$.subscribe(
+      story => {
+        this.plots = story.plots;
+        this.matchingPlot = false;
+        console.log("the story", story);
+        console.log("the plots", this.plots);
+      }
+    );
 
-    }
+    this.plotService.selectedPlots$.subscribe(
+      data => {
+       this.matchingPlot =  !!this.plots?.find(plot => plot.id == data.id)
+      }
+    );
+  }
+
+  create(): void {
+
+  }
+
+  save() {
+
+  }
 
 
-    delete(): void {
+  delete(): void {
 
-    }
+  }
 
-    selectPlot(plot:IPlot){
-      this.plotService.selectPlot(plot);
-    }
+  selectPlot(plot: IPlot) {
+    this.plotService.selectPlot(plot);
+  }
 
 }
+
+import {PlotService} from "../../services/plot.service";

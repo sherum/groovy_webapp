@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {IPlot, IStory} from "../../models/story.model";
 import {StoryService} from "../../services/story.service";
 
@@ -9,8 +9,9 @@ import {StoryService} from "../../services/story.service";
 })
 export class StoryDashboardComponent implements OnInit{
 
- workingStory$ = this.storyService.currentStoryObserver$;
- // plots:IPlot[]|undefined;
+// @ts-ignore
+  @Input() currentStory:IStory;
+
 
      constructor(private storyService:StoryService){}
 
