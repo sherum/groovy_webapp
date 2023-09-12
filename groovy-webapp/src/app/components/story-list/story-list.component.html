@@ -15,7 +15,7 @@
         <a class="btn btn-primary my-2" (click)="save()">Save</a>
       </li>
       <li class="nav-link">
-        <a class="btn btn-success my-2" (click)="sync()">Toggle Form</a>
+        <a class="btn btn-success my-2" (click)="sync()">Sync</a>
       </li>
 
 
@@ -62,7 +62,8 @@
 
 
 <div class="alert alert-danger" *ngIf="errorMessages">{{errorMessages}}</div>
-<h1>Dashboard</h1>
+<!--<h1>Dashboard</h1>-->
 
+<hr>
 
 <app-story-dashboard *ngIf="story"></app-story-dashboard>

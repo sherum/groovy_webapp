@@ -1,5 +1,6 @@
 
-<form #plot >
+<div *ngIf="plot$ | async as plot">
+<form ngForm>
 
     <div class="input-group mb-3">
         <div class="input-group-prepend">
@@ -39,3 +40,4 @@
     <button type="button" class="btn btn-danger m-2" (click)="deletePlot()">Delete</button>
 
 </form>
+</div>

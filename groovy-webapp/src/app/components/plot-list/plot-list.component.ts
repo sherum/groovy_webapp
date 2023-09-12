@@ -13,7 +13,7 @@ export class PlotListComponent {
 
 
     plots:IPlot[]|undefined;
-    plot$ = this.plotService.selectedPlots$;
+    //plot$ = this.plotService.selectedPlots$;
 
 
 
@@ -41,8 +41,8 @@ export class PlotListComponent {
 
     }
 
-    selectedPlot(plot:IPlot){
-
+    selectPlot(plot:IPlot){
+      this.plotService.selectPlot(plot);
     }
 
 }

@@ -2,66 +2,68 @@ import {Component, OnInit} from '@angular/core';
 import {data, IStory} from "../../models/story.model";
 //import {catchError, combineLatest, EMPTY, map, merge, Observable, Subject, tap} from "rxjs";
 import {StoryService} from "../../services/story.service";
-import {filter} from "rxjs";
+import {filter, merge, scan} from "rxjs";
+import {Router} from "@angular/router";
 
 @Component({
-    templateUrl: './story-list.component.html',
-    styleUrls: ['./story-list.component.css'],
+  templateUrl: './story-list.component.html',
+  styleUrls: ['./story-list.component.css'],
 
 })
 export class StoryListComponent implements OnInit {
 
 
-    story: IStory | undefined;
+  story: IStory | undefined;
 
-    errorMessages = ""
-
-
-    stories$ = this.storyService.getStories();
+  errorMessages = ""
 
 
-    constructor(private storyService: StoryService) {}
+  stories$ = merge(
+    this.storyService.getStories(),
+    this.storyService.insertedStory$
+  ).pipe(
+    scan((acc, value) =>
+        (value instanceof Array) ?
+          [...value] : [...acc, value],
+      [] as IStory[])
+  );
 
-    ngOnInit(): void {
-        this.storyService.currentStoryObserver$.subscribe(
-            storyData => this.story = storyData
-        );
-    }
 
-    save(): void {
-        // console.log("save pressed")
-        // let currentStory = <IStory>this.story;
-        // if (currentStory.id) {
-        //     console.log("Update happened")
-        //     this.storyService.updateStory(currentStory);
-        // } else {
-        //     console.log("Not update happened")
-        //     let story$ = this.storyService.newStory();
-        //     (story$).subscribe(data => this.story = data);
-        // }
-    }
+  constructor(private storyService: StoryService, private router:Router) {
+  }
 
-    select(story:IStory) {
-       this.storyService.setCurrentStory(story);
-    }
+  ngOnInit(): void {
+    this.storyService.currentStoryObserver$.subscribe(
+      storyData => this.story = storyData
+    );
+  }
 
-    delete(story:IStory): void {
+  save(): void {
+    this.storyService.updateStory(<IStory>this.story);
+  }
 
-    }
+  select(story: IStory) {
+    this.storyService.setCurrentStory(story);
+  }
 
-    create(): void {
-        // this.storyService.newStory().subscribe(
-        //     data => {
-        //         this.stories?.push(data);
-        //         // @ts-ignore
-        //         this.select(data?.id);
-        //     },
-        //     (err: any) => console.log("new Story error", err)
-        // );
-    }
+  delete(story: IStory): void {
+    console.log("delete pressed in component")
+    this.storyService.delete(<string>story.id)
+  }
 
-    sync(): void {
-        /// this.showForm = !this.showForm;
-    }
+  create(): void {
+
+    this.storyService.newStory().subscribe(
+      data => {
+        this.select(data);
+      },
+      (err: any) => console.log("new Story error", err)
+    );
+  }
+
+  sync(): void {
+   this.router.navigate(['home'])
+     .then(r => this.router.navigate(['stories']));
+  }
 
 }
