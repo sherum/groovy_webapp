@@ -1,9 +1,12 @@
-export interface IPlot{}
+export interface IPlot{
+name:string;
+id?:string;
+parentId?:string;
+type?:string;
+description?:string;
+}
 export interface IPerson{
-  name:string;
-  id?:string;
-  type?:string;
-  description?:string;
+
 }
 export interface IEvent{}
 export interface ILocation{}
@@ -87,28 +90,28 @@ export const data:IStory[] = [
         "description": "An investigation into a specious air disaster creates more questions than it answers as the evidence pushes  progressively more inexplicable root causes.",
         "id": "asdn",
         "name": "main",
-        "parent": "0",
+        "parentId": "0",
         "type": "story"
       },
       {
         "description": "PROT comes to terms with her core beliefs about her faith and what is real.",
         "id": "1234",
         "name": "PROT development",
-        "parent": "0",
+        "parentId": "0",
         "type": "arc"
       },
       {
         "description": "Felcia's boss puts her in charge of the investigaton knowing she is unhinged.",
         "id": "djri",
         "name": "Act 1",
-        "parent": "asdn",
+        "parentId": "asdn",
         "type": "story"
       },
       {
         "description": "Establish Felicia is crazy/PTSD coming off her last job.",
         "id": "5647",
         "name": "PROT development",
-        "parent": "djri",
+        "parentId": "djri",
         "type": "arc"
       }
     ],
@@ -120,7 +123,7 @@ export const data:IStory[] = [
         "id": "0926",
         "location": "3472",
         "name": "Grip and Grin",
-        "parent": "djri",
+        "parentId": "djri",
         "people": [
           "1029"
         ],

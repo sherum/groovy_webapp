@@ -14,6 +14,9 @@ import {SharedModule} from "./shared/shared.module";
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule,HTTP_INTERCEPTORS} from "@angular/common/http";
 import {UserTokenInterceptor} from "./services/user-token.interceptor";
+import { StoryDashboardComponent } from './components/story-dashboard/story-dashboard.component';
+import { PlotListComponent } from './components/plot-list/plot-list.component';
+import { PlotComponent } from './components/plot/plot.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import {UserTokenInterceptor} from "./services/user-token.interceptor";
     AboutComponent,
     HomeComponent,
     StoryComponent,
-    StoryListComponent
+    StoryListComponent,
+    StoryDashboardComponent,
+    PlotListComponent,
+    PlotComponent
   ],
   imports: [
     BrowserModule,
