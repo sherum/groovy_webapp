@@ -1,0 +1,12 @@
+<div class="container">
+  <div  class="custom" *ngIf="daoList$ | async as daoList">
+  <div class="clever">
+    <ul>
+   <li *ngFor="let dao of daoList$ |async">
+      <app-dao-plot (showSelf)="displayPlot($event)" [dao]="dao"></app-dao-plot>
+   </li>
+    </ul>
+  </div>
+  </div>
+
+</div>

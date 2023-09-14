@@ -17,6 +17,8 @@ import {UserTokenInterceptor} from "./services/user-token.interceptor";
 import { StoryDashboardComponent } from './components/story-dashboard/story-dashboard.component';
 import { PlotListComponent } from './components/plot-list/plot-list.component';
 import { PlotComponent } from './components/plot/plot.component';
+import { DaoPlotListComponent } from './components/dao-plot-list/dao-plot-list.component';
+import { DaoPlotComponent } from './components/dao-plot/dao-plot.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { PlotComponent } from './components/plot/plot.component';
     StoryListComponent,
     StoryDashboardComponent,
     PlotListComponent,
-    PlotComponent
+    PlotComponent,
+    DaoPlotListComponent,
+    DaoPlotComponent
   ],
   imports: [
     BrowserModule,

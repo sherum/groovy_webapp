@@ -36,7 +36,7 @@ export class PlotListComponent implements OnInit {
 
     this.plotService.selectedPlots$.subscribe(
       data => {
-       this.matchingPlot =  !!this.plots?.find(plot => plot.id == data.id)
+       // this.matchingPlot =  !!this.plots?.find(plot => plot.id == data.id)
       }
     );
   }
