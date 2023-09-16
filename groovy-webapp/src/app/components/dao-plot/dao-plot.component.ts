@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {IPlotDao} from "../../models/transform.model";
-import {PlotService} from "../../services/plot.service";
 
 @Component({
   selector: 'app-dao-plot',
