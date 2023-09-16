@@ -19,6 +19,7 @@ import { PlotListComponent } from './components/plot-list/plot-list.component';
 import { PlotComponent } from './components/plot/plot.component';
 import { DaoPlotListComponent } from './components/dao-plot-list/dao-plot-list.component';
 import { DaoPlotComponent } from './components/dao-plot/dao-plot.component';
+import { DaoFormComponent } from './components/dao-form/dao-form.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { DaoPlotComponent } from './components/dao-plot/dao-plot.component';
     PlotListComponent,
     PlotComponent,
     DaoPlotListComponent,
-    DaoPlotComponent
+    DaoPlotComponent,
+    DaoFormComponent
   ],
   imports: [
     BrowserModule,

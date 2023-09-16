@@ -1,11 +1,20 @@
 <div class="container">
   <div  class="custom" *ngIf="daoList$ | async as daoList">
-  <div class="clever">
+
+  <div class="row">
+    <div class="col">
+
+
+
     <ul>
    <li *ngFor="let dao of daoList$ |async">
-      <app-dao-plot (showSelf)="displayPlot($event)" [dao]="dao"></app-dao-plot>
+      <app-dao-plot (showSelf)="displayEntryForm($event)" [dao]="dao"></app-dao-plot>
    </li>
     </ul>
+    </div>
+    <div class="col">
+      <app-dao-form [hidden]="showForm" [dao]="selectedDao"></app-dao-form>
+    </div>
   </div>
   </div>
 

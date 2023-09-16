@@ -13,8 +13,10 @@ export class DaoPlotComponent {
   @Output() showSelf = new EventEmitter<IPlotDao>();
 
   showDetail(){
-    this.showSelf.emit(this.dao);
+     this.showSelf.emit(this.dao);
+     console.log("Show Self emitted ",   this.dao);
   }
+
 
 
 

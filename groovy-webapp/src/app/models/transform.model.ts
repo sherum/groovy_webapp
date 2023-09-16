@@ -9,8 +9,8 @@ export interface IPlotDao{
   name:string;
   id?:string;
   parentId?:string;
-  subplots?:Array<IPlotDao>;
   type?:string;
   description?:string;
+  subplots?:Array<IPlotDao>;
 }
 
