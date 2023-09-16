@@ -120,10 +120,21 @@ export class PlotService {
   selectedPlots$ = of(this.daos);
   daoList$ = this.getPlotDaoList();
 
+
   selectPlot(plot: IPlot): void {
     this.selectedStoryPlot.next(plot);
     console.log("A new plot was chosen", plot);
   }
+
+  private currentDiplayedPlotSubject = new Subject<IPlot>();
+  currentSelectedPlot$ = this.currentDiplayedPlotSubject.asObservable();
+
+  nextDisplayedPlot(plot:IPlot):void{
+    console.log("Next displayed subject ",plot)
+    this.currentDiplayedPlotSubject.next(plot);
+  }
+
+
 
   /**
    * Not sure why I think I need this.

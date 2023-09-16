@@ -1,11 +1,22 @@
 <div class="container">
   <div  class="custom" *ngIf="daoList$ | async as daoList">
-  <div class="clever">
+
+  <div class="row">
+    <div class="col-4">
+
+
+
     <ul>
    <li *ngFor="let dao of daoList$ |async">
-      <app-dao-plot (showSelf)="displayPlot($event)" [dao]="dao"></app-dao-plot>
+<!--     dump the event and switch to an observable-->
+      <app-dao-plot [dao]="dao"></app-dao-plot>
    </li>
     </ul>
+    </div>
+    <div class="col">
+<!--      no need for parent-child access need service observable-->
+      <app-dao-form *ngIf="selectedDao"  [dao]="selectedDao"></app-dao-form>
+    </div>
   </div>
   </div>
 

@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {IPlotDao} from "../../models/transform.model";
+import {PlotService} from "../../services/plot.service";
 
 @Component({
   selector: 'app-dao-plot',
@@ -10,11 +11,16 @@ export class DaoPlotComponent {
 
   // @ts-ignore
   @Input() dao:IPlotDao;
-  @Output() showSelf = new EventEmitter<IPlotDao>();
+
+
+  constructor(private plotService:PlotService) {
+  }
 
   showDetail(){
-    this.showSelf.emit(this.dao);
+    console.log("Show detail calls plot service with:",this.dao);
+    this.plotService.nextDisplayedPlot(this.dao);
   }
+
 
 
 

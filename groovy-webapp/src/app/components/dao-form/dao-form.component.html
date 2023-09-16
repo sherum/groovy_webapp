@@ -1,0 +1,21 @@
+<div class="container">
+  <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+    <div class="form-group">
+      <label for="stuff">Name</label>
+      <input id="stuff" class="form-control" type="text"  name="name" [(ngModel)]="dao.name" />
+    </div>
+   <div class="form-group">
+      <label for="type">Type</label>
+      <input id="type" class="form-control" type="text"  name="type" [(ngModel)]="dao.type"/>
+    </div>
+   <div class="form-group">
+      <label for="description">Description</label>
+     <textarea id="description" class="form-control" type="text"  name="description" row="2" [(ngModel)]="dao.description"></textarea>
+    </div>
+   <div class="form-group">
+
+
+      <button type="button" class="btn btn-primary m-2" (click)="addSubplot()">New Child</button>
+    </div>
+  </form>
+</div>
