@@ -1,49 +1,94 @@
-export interface IPlot{
-name:string;
-id?:string;
-parentId?:string;
-type?:string;
-description?:string;
+import {IPlotView} from "./transform.model";
+
+
+export interface IPlot {
+  name: string;
+  id?: string;
+  parentId?: string;
+  type?: string;
+  description?: string;
 }
-export interface IPerson{
 
-}
-export interface IEvent{}
-export interface ILocation{}
-export interface IThing{}
-
-export interface IScene{}
-
-
-
-export interface IStory{
-  title:string;
-  id?:string;
-  author?:string;
-  genre?:string;
-  maguffin?:string;
-  summary?:string;
-  plots?:IPlot[];
-  scenes?:IScene[];
-  people?:IPerson[];
-  events?:IEvent[];
-  locations?:ILocation[];
-  things?:IThing[];
-
+export interface IPerson {
 
 }
 
+export interface IEvent {
+}
 
-export const newStory:IStory  = {
-  title:"New story",
-  id:"0",
-  author:"New Author",
+export interface ILocation {
+}
+
+export interface IThing {
+}
+
+export interface IScene {
+}
+
+
+export interface IStory {
+  title: string;
+  id?: string;
+  author?: string;
+  genre?: string;
+  maguffin?: string;
+  summary?: string;
+  plots?: IPlotView[];
+  scenes?: IScene[];
+  people?: IPerson[];
+  events?: IEvent[];
+  locations?: ILocation[];
+  things?: IThing[];
+
+
+}
+
+export class Story implements IStory {
+
+   title = " ";
+   author: string | undefined;
+   genre: string | undefined;
+   id: string | undefined;
+   maguffin: string | undefined;
+   summary: string | undefined;
+   plots = new Array<IPlotView>();
+   scenes = new Array<IScene>()
+   people = new Array<IPerson>();
+   events = new Array<IEvent>();
+   locations = new Array<ILocation>();
+   things = new Array<IThing>();
+
+  constructor(istory: IStory) {
+    this.title = istory.title ? istory.title : " ",
+      this.id = istory.id,
+      this.author = istory.author,
+      this.genre = istory.genre,
+      this.summary = istory.summary,
+      this.scenes = istory.scenes ? istory.scenes : new Array<IScene>(),
+      this.maguffin = istory.maguffin,
+      this.plots = istory.plots ? istory.plots : new Array<IPlotView>(),
+      this.people = istory.people ? istory.people : new Array<IPerson>(),
+      this.events = istory.events ? istory.events : new Array<IEvent>(),
+      this.locations = istory.locations ? istory.locations : new Array<ILocation>(),
+      this.things = istory.things ? istory.things : new Array<IThing>()
+  }
+
+
+
+
+}
+
+
+export const newStory: IStory = {
+  title: "New story",
+  id: "0",
+  author: "New Author",
   genre: "Fiction",
   maguffin: "A gripping tale",
-  summary:"A synopsis of the idea"
+  summary: "A synopsis of the idea"
 }
 
-export const data:IStory[] = [
+export const data: IStory[] = [
 
   {
     "events": [
@@ -85,41 +130,50 @@ export const data:IStory[] = [
         "type": "SUPP"
       }
     ],
+    // name:string;
+    // id?:string;
+    // parentId?:string;
+    // type?:string;
+    // description?:string;
+    // subplots?:Array<IPlotView>;
     "plots": [
       {
-        "description": "An investigation into a specious air disaster creates more questions than it answers as the evidence pushes  progressively more inexplicable root causes.",
-        "id": "asdn",
         "name": "main",
+        "id": "asdn",
         "parentId": "0",
-        "type": "story"
+        "type": "story",
+        "description": "An investigation into a specious air disaster creates more questions than it answers as the evidence pushes  progressively more inexplicable root causes.",
+        "subplots": []
       },
       {
-        "description": "PROT comes to terms with her core beliefs about her faith and what is real.",
+        "name": "PROT development",
         "id": "1234",
-        "name": "PROT development",
         "parentId": "0",
-        "type": "arc"
+        "type": "arc",
+        "description": "PROT comes to terms with her core beliefs about her faith and what is real.",
+        "subplots": []
       },
       {
-        "description": "Felcia's boss puts her in charge of the investigaton knowing she is unhinged.",
-        "id": "djri",
         "name": "Act 1",
+        "id": "djri",
         "parentId": "asdn",
-        "type": "story"
+        "type": "story",
+        "description": "Felcia's boss puts her in charge of the investigaton knowing she is unhinged.",
+        "subplots": []
       },
       {
-        "description": "Establish Felicia is crazy/PTSD coming off her last job.",
-        "id": "5647",
         "name": "PROT development",
+        "id": "5647",
         "parentId": "djri",
-        "type": "arc"
+        "type": "arc",
+        "description": "Establish Felicia is crazy/PTSD coming off her last job.",
+        "subplots": []
       }
     ],
     "scenes": [
       {
         "dtg": "12 May 2017:1200",
-        "events": [
-        ],
+        "events": [],
         "id": "0926",
         "location": "3472",
         "name": "Grip and Grin",
@@ -130,8 +184,7 @@ export const data:IStory[] = [
         "plot": "5647",
         "plotpoints": "Felicia's inappropriate wardrobe and decorum show her disconnct with civil society.",
         "setting": "Felicia arrives while Grambone is briefing the staff in the conference room.",
-        "things": [
-        ]
+        "things": []
       }
     ],
     "id": "124567890",

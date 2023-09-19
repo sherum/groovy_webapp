@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {Observable, of, Subject} from "rxjs";
-import {data, IPlot, IStory} from "../models/story.model";
+import {map, Observable, of, Subject} from "rxjs";
+import {data,IStory} from "../models/story.model";
 import {StoryService} from "./story.service";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {IPlotDao} from "../models/transform.model";
+import {IPlotView} from "../models/transform.model";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ import {IPlotDao} from "../models/transform.model";
 export class PlotService {
 
 
-  daos:IPlotDao[] = [
+  daos:IPlotView[] = [
     {
       "name":"Main Plot",
       "id":"A",
@@ -112,24 +112,32 @@ export class PlotService {
   constructor(private http: HttpClient, private storyService: StoryService) {
   }
 
-  selctedStory$ = this.storyService.currentStoryObserver$;
+  selctedStory$ = this.storyService.getStories();
+  selectedPlotList$ = this.storyService.currentStoryObserver$.pipe(
+    map(story => story.plots)
+  )
 
 
-  private selectedStoryPlot = new Subject<IPlot>();
-  // selectedPlots$ = this.selectedStoryPlot.asObservable();
-  selectedPlots$ = of(this.daos);
+  nextSelectedPlotList(plotviews:IPlotView[]):void{
+    this.selectedPlotList.next(plotviews);
+  }
+
+
+  private selectedStoryPlot = new Subject<IPlotView>();
+  selectedPlots$ = this.selectedStoryPlot.asObservable();
+
   daoList$ = this.getPlotDaoList();
 
 
-  selectPlot(plot: IPlot): void {
+  selectPlot(plot: IPlotView): void {
     this.selectedStoryPlot.next(plot);
     console.log("A new plot was chosen", plot);
   }
 
-  private currentDiplayedPlotSubject = new Subject<IPlot>();
+  private currentDiplayedPlotSubject = new Subject<IPlotView>();
   currentSelectedPlot$ = this.currentDiplayedPlotSubject.asObservable();
 
-  nextDisplayedPlot(plot:IPlot):void{
+  nextDisplayedPlot(plot:IPlotView):void{
     console.log("Next displayed subject ",plot)
     this.currentDiplayedPlotSubject.next(plot);
   }
@@ -140,26 +148,26 @@ export class PlotService {
    * Not sure why I think I need this.
    * @private
    */
-  private selectedPlotList = new Subject<IPlot[]>();
+  private selectedPlotList = new Subject<IPlotView[]>();
   currentPlotList$ = this.selectedPlotList.asObservable()
 
-  updatePlotList(plot: IPlot[]): void {
+  updatePlotList(plot: IPlotView[]): void {
     this.selectedPlotList.next(plot);
   }
 
-  private storySavePlot = new Subject<IPlot>();
+  private storySavePlot = new Subject<IPlotView>();
   insertedSavePlot$ = this.storySavePlot.asObservable();
 
-  updateSavePlot(plot: IPlot): void {
+  updateSavePlot(plot: IPlotView): void {
     this.storySavePlot.next(plot);
   }
 
-  newPlot(story: IStory): Observable<IPlot> {
+  newPlot(story: IStory): Observable<IPlotView> {
     let storyId = story.id;
     console.log("New PLot CHeking storyId ", storyId);
     let payload = "AAA" + storyId;
     let uri = `${this.getPlotsUri}/new`;
-    return this.http.post<IPlot>(uri, payload,
+    return this.http.post<IPlotView>(uri, payload,
       {headers: this.headers});
   }
 
@@ -177,8 +185,8 @@ export class PlotService {
 
   }
 
-  private getPlotDaoList():Observable<IPlotDao[]> {
-   return this.http.get<IPlotDao[]>(this.getPlotsUri,{headers:this.headers});
+  private getPlotDaoList():Observable<IPlotView[]> {
+   return this.http.get<IPlotView[]>(this.getPlotsUri,{headers:this.headers});
 
   }
 }

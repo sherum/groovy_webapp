@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {IPlotDao} from "../../models/transform.model";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {IPlotView, PlotView} from "../../models/transform.model";
 import {NgForm} from "@angular/forms";
 
 @Component({
@@ -10,15 +10,24 @@ import {NgForm} from "@angular/forms";
 export class DaoFormComponent {
 
   // @ts-ignore
-  @Input() dao: IPlotDao;
+  @Input() dao: IPlotView;
+  @Output() savePlot = new EventEmitter<IPlotView>();
 
 
 
   addSubplot(): void {
+   let subplot = new PlotView(this.dao.id);
+   this.dao.subplots?.push(subplot);
+   this.save();
+
   }
 
   onSubmit(form: NgForm) {
 
+
+  }
+  save():void{
+    this.savePlot.emit(this.dao);
   }
 
 

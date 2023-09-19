@@ -27,6 +27,7 @@ export class PlotListComponent implements OnInit {
   ngOnInit(): void {
     this.plotService.selctedStory$.subscribe(
       story => {
+        // @ts-ignore
         this.plots = story.plots;
         this.matchingPlot = false;
         console.log("the story", story);

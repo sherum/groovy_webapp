@@ -1,6 +1,7 @@
+
+<label><a class="link" (click)="showDetail()">{{dao.name}}</a></label>
 <div class="container-flex" *ngIf="dao.subplots">
 
-  <label><a class="link" (click)="showDetail()">{{dao.name}}</a></label>
 
   <ul class="">
     <li *ngFor="let sub of dao.subplots">

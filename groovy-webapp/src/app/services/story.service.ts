@@ -5,6 +5,8 @@ import {BehaviorSubject, combineLatest, map, merge, Observable, of, scan, Subjec
 
 import {IStory, data, newStory} from "../models/story.model";
 
+  const result1 = {};
+  const result2 = {};
 @Injectable({
   providedIn: 'root'
 })
@@ -27,6 +29,7 @@ export class StoryService {
 
   setCurrentStory(story: IStory) {
     this.currentStorySubject.next(story);
+
   }
 
   private insertedStorySubject = new Subject<IStory>();

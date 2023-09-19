@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {data, IStory} from "../../models/story.model";
+import {IStory} from "../../models/story.model";
 //import {catchError, combineLatest, EMPTY, map, merge, Observable, Subject, tap} from "rxjs";
 import {StoryService} from "../../services/story.service";
 import {filter, merge, scan} from "rxjs";
