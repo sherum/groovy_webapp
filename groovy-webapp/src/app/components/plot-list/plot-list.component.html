@@ -1,38 +1,48 @@
-<!--<nav class="navbar navbar-expand-lg">-->
-<!--    <div class="container">-->
-<!--        <ul class="navbar-nav me-auto mb-2 mb-md-0">-->
-<!--            <li>-->
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <li>
 
-<!--                <a class="link link-success mx-2" (click)="create()">New Plot</a>-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--        <div class="d-flex">-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</nav>-->
+                <button class="btn btn-outline-primary  my-2" (click)="create()">New Plot</button>
+            </li>
+        </ul>
+        <div class="d-flex">
+            <li class="nav-link">
+                <a class="btn btn-primary m-2" (click)="save()">Save</a>
+            </li>
+            <li class="nav-link">
+                <a class="btn btn-success m-2" (click)="sync()">Sync</a>
+            </li>
+        </div>
+    </div>
+</nav>
 
 
-<!--<div class="row">-->
-<!--<div class="col">-->
-<!--    <div>-->
-<!--        <table class="table-striped">-->
-<!--            <thead>-->
-<!--            <tr>-->
-<!--                <th>Name</th>-->
+<div class="row">
+<div class="col-md-3">
+    <div>
+        <table class="table-striped">
+            <thead>
+            <tr>
+                <th> Plot/Story Name</th><th>Action</th>
 
-<!--            </tr>-->
-<!--            </thead>-->
-<!--            <tbody>-->
-<!--            <tr *ngFor="let plot of plots">-->
-<!--                <td><a class="link link-primary" (click)="selectPlot(plot)"> {{plot?.name}} </a> </td>-->
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let plot of plot$ | async">
+                <ng-container *ngIf="plot.topPlot">
+                <td class="m-2"><a class="link link-primary" (click)="select(plot)"> {{plot?.name}} </a> </td>
+                <td class="m-2"><a class="link-danger" (click)="delete(plot)">Delete</a></td>
+                </ng-container>
 
-<!--            </tr>-->
-<!--            </tbody>-->
-<!--        </table>-->
-<!--    </div>-->
-<!--</div>-->
-<!--<div class="col">-->
-<!--<app-plot *ngIf="matchingPlot" [currentStory]="story"-->
-<!--(showDetail)="displayPlot()"></app-plot>-->
-<!--</div>-->
-<!--</div>-->
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="col-md-8" *ngIf="selectedDao$">
+<!--  <app-dao-form *ngIf="selectedDao"  [dao]="selectedDao" (deletePlot)="delete($event)" (savePlot)="save($event)"></app-dao-form>-->
+<app-plot [plot]="selectedDao$ | async"></app-plot>
+</div>
+{{selectedDao | json}}
+</div>

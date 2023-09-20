@@ -1,5 +1,6 @@
-<div class="container">
+<div class="container" *ngIf="dao">
   <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+    <label>{{dao.id}}</label>
     <div class="form-group">
       <label for="stuff">Name</label>
       <input id="stuff" class="form-control" type="text"  name="name" [(ngModel)]="dao.name" />
@@ -15,8 +16,13 @@
    <div class="form-group">
 
 
-     <button class="btn btn-success" type="button" (click)="save()">Save</button>
+     <button class="btn btn-success" type="submit" >Save</button>
       <button type="button" class="btn btn-primary m-2" (click)="addSubplot()">New Child</button>
+     <button *ngIf="dao.id" type="button" class="btn btn-danger m-2" (click)="delete()">Delete</button>
+      <button *ngIf="!dao.topPlot" type="button" class="link-success m-2" (click)="promote()">Top Plot</button>
+
     </div>
   </form>
+
+
 </div>

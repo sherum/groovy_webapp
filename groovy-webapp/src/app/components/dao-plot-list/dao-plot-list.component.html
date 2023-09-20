@@ -1,27 +1,25 @@
 <div class="container">
-  <div class="justify-content-end">
-  <button type="button" (click)="create()" class="m-2 tn btn-sm btn-outline-primary ">New Plot</button>
-  </div>
-    <div  class="custom" *ngIf="daoList$ ">
-
-  <div class="row">
-    <div class="col-4">
-
-
-
-    <ul>
-   <li *ngFor="let dao of daoList$ |async">
-<!--   <li *ngFor="let dao of daoList">-->
-<!--     dump the event and switch to an observable-->
-      <app-dao-plot [dao]="dao"></app-dao-plot>
-   </li>
-    </ul>
+    <div class="justify-content-end">
+        <button type="button" (click)="create()" class="m-2 tn btn-sm btn-outline-primary ">New Plot</button>
     </div>
-    <div class="col">
-<!--      no need for parent-child access need service observable-->
-      <app-dao-form *ngIf="selectedDao"  [dao]="selectedDao" (savePlot)="save($event)"></app-dao-form>
-    </div>
-  </div>
-  </div>
+    <div class="custom" >
 
+        <div class="row">
+            <div class="col-4">
+
+
+                <ul>
+                    <li *ngFor="let dao of daoList$ |async">
+
+                        <app-dao-plot [dao]="dao"></app-dao-plot>
+                    </li>
+                </ul>
+            </div>
+            <div class="col">
+                <!--      no need for parent-child access need service observable-->
+                <app-dao-form *ngIf="selectedDao$" [dao]="selectedDao$ | async" (deletePlot)="delete($event)"
+                              (savePlot)="save($event)"></app-dao-form>
+            </div>
+        </div>
+    </div>
 </div>
