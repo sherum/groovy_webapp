@@ -1,8 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {PlotService} from "../../services/plot.service";
-import {IPlotView, PlotView} from "../../models/transform.model";
-import {from, Observable, of, scan, merge} from "rxjs";
-import {IStory, Story} from "../../models/story.model";
+import {IPlotView} from "../../models/transform.model";
+import {combineLatest, map, merge, Observable, scan} from "rxjs";
+import {IStory} from "../../models/story.model";
+
+
 
 @Component({
     selector: 'app-dao-plot-list',
@@ -13,44 +15,84 @@ export class DaoPlotListComponent implements OnInit {
 
     // @ts-ignore
     @Input() story: IStory
+    sid: string | undefined;
+    currentStory$ = this.plotService.selectedStory$;
 
+    storyPlots$ = this.plotService.getPlots()
+        .pipe(
+            map(plots =>
+                plots.filter(plot => this.story.id == plot.storyId))
+        );
 
-  daoList$ = merge(
-        this.plotService.selectedPlotList$,
-        this.plotService.insertedSavePlot$
+    daoList$ = merge(
+        this.storyPlots$,
+        this.plotService.insertedPlot$
     ).pipe(
-     scan((acc, value) =>
-      (value instanceof Array) ?
-        [...value] : [...acc, value],
-     [] as IPlotView[])
+        scan((acc, value) =>
+                (value instanceof Array) ?
+                    [...value] : [...acc, value],
+            [] as IPlotView[]),
     );
 
+    plots$ = combineLatest([
+        this.plotService.getPlots(),
+        this.plotService.selectedStory$
+    ])
+        .pipe(
+            map(([plots, story]) =>
+                plots.filter((plot: IPlotView) =>
+                    // @ts-ignore
+                    plot.storyId == story.id)
+                )
+        );
 
-    // @ts-ignore
-    selectedDao: IPlotView;
+
+    selectedDao$: Observable<IPlotView> = this.plotService.currentPlotObserver$;
 
 
     constructor(private plotService: PlotService) {
     }
 
     ngOnInit(): void {
-        this.plotService.currentSelectedPlot$.subscribe(
-            data => this.selectedDao = data
-        );
     }
 
     create(): void {
-        let parentId = this.selectedDao?.parentId;
-        let plotview: IPlotView = new PlotView(parentId);
-        this.plotService.updateSavePlot(plotview);
-        this.plotService.selectPlot(plotview);
+        let sid = this.story.id;
+        let pid: string | undefined;
+        let plot: IPlotView;
+        this.selectedDao$.subscribe(data => pid = data.id);
+        this.plotService.newPlot().subscribe(
+            {
+                next: newplot => {
+                    plot = newplot
+                    plot.storyId = sid;
+                    plot.parentId = pid;
+                },
+                error: err => console.log("Plot creation error", [sid, pid, err]),
+                complete: () => {
+                    // @ts-ignore
+                    plot.parentId.length < 1 ? plot.topPlot = true : plot.topPlot = false;
+                    this.plotService.setCurrentPlot(plot)
+                }
+            }
+        );
     }
 
-    save(dao:IPlotView):void{
-      this.plotService.updateSavePlot(<IPlotView>this.selectedDao);
-
-
+    save(event: IPlotView): void {
+        this.plotService.setCurrentPlot(<IPlotView>event)
+        this.plotService.updatePlot();
     }
+
+
+    delete(event: IPlotView): void {
+        this.plotService.setCurrentPlot(<IPlotView>event)
+        this.plotService.deletePlot();
+    }
+
+// delete(dao:IPlotView):void{
+//       // @ts-ignore
+//       this.plotService.deletePlot(this.story.id,dao.id);
+//     }
 
 
 }

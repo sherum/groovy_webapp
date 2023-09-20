@@ -43,6 +43,7 @@ export class StoryListComponent implements OnInit {
   }
 
   select(story: IStory) {
+    console.log("set current story");
     this.storyService.setCurrentStory(story);
   }
 
@@ -54,10 +55,8 @@ export class StoryListComponent implements OnInit {
   create(): void {
 
     this.storyService.newStory().subscribe(
-      data => {
-        this.select(data);
-      },
-      (err: any) => console.log("new Story error", err)
+        {next:  data => this.select(data),
+          error: err => console.log("new Story error", err)}
     );
   }
 
