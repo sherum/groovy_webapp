@@ -17,8 +17,12 @@
             </div>
             <div class="col">
                 <!--      no need for parent-child access need service observable-->
-                <app-dao-form *ngIf="selectedDao$" [dao]="selectedDao$ | async" (deletePlot)="delete($event)"
-                              (savePlot)="save($event)"></app-dao-form>
+                <app-dao-form *ngIf="selectedDao$"
+                              [dao]="selectedDao$ | async"
+                              (deletePlot)="delete($event)"
+                              (savePlot)="save($event)"
+                              (createSubplot)="addSubplot($event)"
+                ></app-dao-form>
             </div>
         </div>
     </div>

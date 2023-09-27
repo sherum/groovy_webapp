@@ -49,6 +49,12 @@ export class PlotService {
         return this.http.post<IPlotView>(this.plotEndpoint, {}, {})
     }
 
+    newRefPlot(storyId:string): Observable<IPlotView>{
+      let uri = `${this.plotEndpoint}/newref`;
+     return this.http.post<IPlotView>(uri, {body:storyId},{headers:this.headers})
+
+    }
+
     newTopPlot(): Observable<IPlotView> {
         let uri = `${this.plotEndpoint}/new`;
         return this.http.put<IPlotView>(uri, {}, {headers: this.headers});
@@ -128,9 +134,11 @@ export class PlotService {
      * return an empty plot with a new id assigned to parentid
      * @param parentId
      */
-    insertChildPlot(parentId: string): Observable<IPlotView> {
-        let uri = `${this.plotEndpoint}/${parentId}`
-        return this.http.post<IPlotView>(uri, {}, {headers: this.headers})
+    insertChildPlot(parent:IPlotView):void {
+        let uri = `${this.plotEndpoint}/subplot`
+        this.http.post<IPlotView>(uri, parent, {headers: this.headers}).subscribe(
+          data => this.setCurrentPlot(data)
+        );
     }
 
     insertNewPlot(): Observable<IPlotView> {

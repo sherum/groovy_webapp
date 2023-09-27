@@ -5,6 +5,7 @@ import {combineLatest, map, merge, Observable, scan} from "rxjs";
 import {IStory} from "../../models/story.model";
 
 
+
 @Component({
     selector: 'app-dao-plot-list',
     templateUrl: './dao-plot-list.component.html',
@@ -23,19 +24,6 @@ export class DaoPlotListComponent implements OnInit {
                 plots.filter(plot => this.story.id == plot.storyId))
         );
 
-    plots$ = combineLatest([
-        this.plotService.getPlots(),
-        this.plotService.selectedStory$
-    ])
-        .pipe(
-            map(([plots, story]) =>
-                plots.filter((plot: IPlotView) =>
-                    // @ts-ignore
-                    plot.storyId == story.id)
-            )
-        );
-
-
     daoList$ = merge(
         this.plots$,
         this.plotService.insertedPlot$
@@ -46,6 +34,20 @@ export class DaoPlotListComponent implements OnInit {
             [] as IPlotView[]),
     );
 
+
+
+    selectedDao$: Observable<IPlotView> = this.plotService.currentPlotObserver$;
+    plots$ = combineLatest([
+        this.plotService.getPlots(),
+        this.plotService.selectedStory$
+    ])
+        .pipe(
+            map(([plots, story]) =>
+                plots.filter((plot: IPlotView) =>
+                    // @ts-ignore
+                    plot.storyId == story.id)
+                )
+        );
 
 
     selectedDao$: Observable<IPlotView> = this.plotService.currentPlotObserver$;
@@ -89,11 +91,6 @@ export class DaoPlotListComponent implements OnInit {
         this.plotService.setCurrentPlot(<IPlotView>event)
         this.plotService.deletePlot();
     }
-
-// delete(dao:IPlotView):void{
-//       // @ts-ignore
-//       this.plotService.deletePlot(this.story.id,dao.id);
-//     }
 
 
 }

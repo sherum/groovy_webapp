@@ -21,6 +21,7 @@ export class PlotListComponent implements OnInit {
     selectedDao$ = this.plotService.currentPlotObserver$;
     removeChildren = false;
 
+  //plot$ = this.plotService.selectedPlots$;
 
     plot$: Observable<IPlotView[]> = merge(
         this.plotService.getPlots(),
@@ -73,3 +74,4 @@ export class PlotListComponent implements OnInit {
 
 }
 
+import {PlotService} from "../../services/plot.service";

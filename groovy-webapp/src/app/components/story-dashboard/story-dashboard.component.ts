@@ -14,7 +14,9 @@ export class StoryDashboardComponent {
 
 
      constructor(private storyService:StoryService){}
-  
 
+  updateStory(story:IStory):void{
+       this.storyService.updateStory(story);
+  }
 
 }

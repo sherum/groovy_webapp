@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {IPlotView, PlotView} from "../../models/transform.model";
 import {NgForm} from "@angular/forms";
+import {PlotService} from "../../services/plot.service";
 
 @Component({
   selector: 'app-dao-form',
@@ -13,15 +14,13 @@ export class DaoFormComponent {
   @Input() dao: IPlotView;
   @Output() savePlot = new EventEmitter<IPlotView>();
   @Output() deletePlot = new EventEmitter<IPlotView>();
+  @Output() createSubplot = new EventEmitter<IPlotView>();
 
-
+constructor(private plotService:PlotService) {}
 
 
   addSubplot(): void {
-   let subplot = new PlotView(this.dao);
-   this.dao.subplots?.push(subplot);
-   this.save();
-
+  this.createSubplot.emit(this.dao);
   }
 
   promote(): void {
