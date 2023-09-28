@@ -8,8 +8,9 @@
             <div class="col-4">
 
 
-                <ul>
-                    <li *ngFor="let dao of daoList$ |async">
+                <ul  *ngIf="story">
+                    <li *ngFor="let dao of plots">
+                         <!-- <li *ngFor="let dao of daoList$ |async">-->
 
                         <app-dao-plot [dao]="dao"></app-dao-plot>
                     </li>

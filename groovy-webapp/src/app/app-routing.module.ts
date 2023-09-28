@@ -6,6 +6,8 @@ import {AboutComponent} from "./components/about/about.component";
 import {StoryListComponent} from "./components/story-list/story-list.component";
 import {ProfileComponent} from "./components/profile/profile.component";
 import {PlotListComponent} from "./components/plot-list/plot-list.component";
+import {DaoPlotListComponent} from "./components/dao-plot-list/dao-plot-list.component";
+import {StoryComponent} from "./components/story/story.component";
 
 const routes: Routes = [
   {
@@ -19,6 +21,18 @@ const routes: Routes = [
   {
     path: 'stories',
     component: StoryListComponent
+    ,children:[
+      {path:':id',component:StoryComponent,children:[
+        { path:':id/plots',component:DaoPlotListComponent}
+          // ,
+          // { path:'scenes',component:SceneListComponent},
+          // { path:'people',component:PeopleListComponent},
+          // { path:'events',component:EventListComponent},
+          // { path:'locations',component:LocationListComponent},
+          // { path:'things',component:ThingsListComponent}]}
+    ]}
+      ]
+
   },
   {
     path: 'profile',

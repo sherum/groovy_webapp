@@ -40,7 +40,8 @@
         </thead>
         <tbody>
         <tr *ngFor="let story of stories$|async">
-          <td><a class="link-primary" (click)="select(story)">{{story.title}}</a></td>
+          <td><a class="link-primary" [routerLink]="[story.id]">{{story.title}}</a></td>
+<!--         <td><a class="link-primary" (click)="select(story)">{{story.title}}</a></td>-->
           <td><a class="link-danger" (click)="delete(story)">Delete</a></td>
         </tr>
         </tbody>
@@ -50,11 +51,17 @@
     </div>
   </div>
 
-  <div class="col-md-8">
-    <div *ngIf="story">
-      <app-story
-        [story]="story"
-      ></app-story>
+<!--  <div class="col-md-8">-->
+<!--    <div *ngIf="story">-->
+<!--      <app-story-->
+<!--        [story]="story"-->
+<!--      ></app-story>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+ <div class="col-md-8">
+    <div>
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>

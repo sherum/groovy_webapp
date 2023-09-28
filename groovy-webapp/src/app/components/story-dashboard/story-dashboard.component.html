@@ -1,37 +1,49 @@
-
-<!--<div *ngIf="story" class="container">-->
-<ul class="nav nav-tabs" id="myTab" role="tablist">
+<div *ngIf="currentStory" class="container">
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="plots-tab" data-bs-toggle="tab" data-bs-target="#plots" type="button" role="tab" aria-controls="plots" aria-selected="true">Plots</button>
+      <button class="nav-link active" id="plots-tab" data-bs-toggle="tab" data-bs-target="#plots" type="button"
+              role="tab" aria-controls="plots" aria-selected="true">Plots
+      </button>
     </li>
     <li class="nav-item" role="presentation">
-        <button class="nav-link" id="scenes-tab" data-bs-toggle="tab" data-bs-target="#scenes" type="button" role="tab" aria-controls="scenes" aria-selected="false">Scenes</button>
+      <button class="nav-link" id="scenes-tab" data-bs-toggle="tab" data-bs-target="#scenes" type="button" role="tab"
+              aria-controls="scenes" aria-selected="false">Scenes
+      </button>
     </li>
     <li class="nav-item" role="presentation">
-        <button class="nav-link" id="people-tab" data-bs-toggle="tab" data-bs-target="#people" type="button" role="tab" aria-controls="people" aria-selected="false">People</button>
+      <button class="nav-link" id="people-tab" data-bs-toggle="tab" data-bs-target="#people" type="button" role="tab"
+              aria-controls="people" aria-selected="false">People
+      </button>
     </li>
     <li class="nav-item" role="presentation">
-        <button class="nav-link" id="locations-tab" data-bs-toggle="tab" data-bs-target="#locations" type="button" role="tab" aria-controls="locations" aria-selected="true">Locations</button>
+      <button class="nav-link" id="locations-tab" data-bs-toggle="tab" data-bs-target="#locations" type="button"
+              role="tab" aria-controls="locations" aria-selected="true">Locations
+      </button>
     </li>
     <li class="nav-item" role="presentation">
-        <button class="nav-link" id="events-tab" data-bs-toggle="tab" data-bs-target="#events" type="button" role="tab" aria-controls="events" aria-selected="false">Events</button>
+      <button class="nav-link" id="events-tab" data-bs-toggle="tab" data-bs-target="#events" type="button" role="tab"
+              aria-controls="events" aria-selected="false">Events
+      </button>
     </li>
     <li class="nav-item" role="presentation">
-        <button class="nav-link" id="things-tab" data-bs-toggle="tab" data-bs-target="#things" type="button" role="tab" aria-controls="things" aria-selected="false">Things</button>
+      <button class="nav-link" id="things-tab" data-bs-toggle="tab" data-bs-target="#things" type="button" role="tab"
+              aria-controls="things" aria-selected="false">Things
+      </button>
     </li>
-</ul>
-<div class="row">
+  </ul>
+  <div class="row">
     <div class="container">
-        <div class="tab-content" id="myTabContent">
-          <div class="tab-pane fade show active" id="plots" role="tabpanel" aria-labelledby="plots-tab">
-            <app-dao-plot-list [story]="currentStory" (update)="updateStory($event)"></app-dao-plot-list>
-                </div>
-            <div class="tab-pane fade" id="scenes" role="tabpanel" aria-labelledby="scenes-tab">...</div>
-            <div class="tab-pane fade" id="people" role="tabpanel" aria-labelledby="people-tab">...</div>
-            <div class="tab-pane fade" id="locations" role="tabpanel" aria-labelledby="locations-tab">...</div>
-            <div class="tab-pane fade" id="events" role="tabpanel" aria-labelledby="events-tab">...</div>
-            <div class="tab-pane fade" id="things" role="tabpanel" aria-labelledby="things-tab">...</div>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="plots" role="tabpanel" aria-labelledby="plots-tab">
+          <!--<app-dao-plot-list [story]="currentStory" [plots]="plots"></app-dao-plot-list>-->
+          <router-outlet></router-outlet>
         </div>
+        <div class="tab-pane fade" id="scenes" role="tabpanel" aria-labelledby="scenes-tab">...</div>
+        <div class="tab-pane fade" id="people" role="tabpanel" aria-labelledby="people-tab">...</div>
+        <div class="tab-pane fade" id="locations" role="tabpanel" aria-labelledby="locations-tab">...</div>
+        <div class="tab-pane fade" id="events" role="tabpanel" aria-labelledby="events-tab">...</div>
+        <div class="tab-pane fade" id="things" role="tabpanel" aria-labelledby="things-tab">...</div>
+      </div>
 
     </div>
-</div>
+  </div>

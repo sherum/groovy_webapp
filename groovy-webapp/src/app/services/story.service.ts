@@ -20,11 +20,11 @@ export class StoryService {
   storyEndpoint = `${this.url}/story`
   headers = new HttpHeaders({'Content-Type': 'application/json', 'Accept': 'application/json'});
 
-  private currentStorySubject = new Subject<IStory|undefined>();
+  private currentStorySubject = new Subject<IStory | undefined>();
   currentStoryObserver$ = this.currentStorySubject.asObservable();
 
   setCurrentStory(story: IStory) {
-   console.log("set current story");
+    console.log("set current story");
     this.currentStorySubject.next(story);
   }
 
@@ -41,7 +41,10 @@ export class StoryService {
     return this.http.get<IStory[]>(this.storyEndpoint, {headers: this.headers});
   }
 
-
+  getStory(storyId: string): Observable<IStory> {
+    let uri = `${this.storyEndpoint}/${storyId}`
+    return this.http.get<IStory>(uri, {headers: this.headers});
+  }
 
 
   newStory(): Observable<IStory> {
@@ -70,7 +73,8 @@ export class StoryService {
   delete(id: string): void {
     let uri = this.storyEndpoint + `/${id}`;
     this.http.delete(uri, {headers: this.headers}).subscribe(
-      data =>{},
+      data => {
+      },
       err => console.log("Delete Error", err),
       () => console.log("Delete completed")
     );
@@ -87,12 +91,10 @@ export class StoryService {
 }
 
 
-
-
-  // getStoriesRx(): Observable<IStory[]> {
-  //   let uri = `${this.storyEndpoint}/rx`
-  //   return this.http.get<IStory[]>(uri, {headers: this.headers});
-  // }
+// getStoriesRx(): Observable<IStory[]> {
+//   let uri = `${this.storyEndpoint}/rx`
+//   return this.http.get<IStory[]>(uri, {headers: this.headers});
+// }
 
 // saveStory(story:IStory):Observable<IStory>{
 //   return this.http.post<IStory>(this.getStoriesUri,story,{})

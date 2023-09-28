@@ -13,7 +13,7 @@ import {Router} from "@angular/router";
 export class StoryListComponent implements OnInit {
 
 
-  story: IStory | undefined;
+  story:IStory |undefined;
 
   errorMessages = ""
 
@@ -43,7 +43,8 @@ export class StoryListComponent implements OnInit {
   }
 
   select(story: IStory) {
-    console.log("set current story");
+    console.log("set current story to : ",story);
+    this.story = story;
     this.storyService.setCurrentStory(story);
   }
 
