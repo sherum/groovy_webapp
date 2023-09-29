@@ -8,6 +8,7 @@ import {ProfileComponent} from "./components/profile/profile.component";
 import {PlotListComponent} from "./components/plot-list/plot-list.component";
 import {DaoPlotListComponent} from "./components/dao-plot-list/dao-plot-list.component";
 import {StoryComponent} from "./components/story/story.component";
+import {StoryDashboardComponent} from "./components/story-dashboard/story-dashboard.component";
 
 const routes: Routes = [
   {
@@ -20,19 +21,10 @@ const routes: Routes = [
   },
   {
     path: 'stories',
-    component: StoryListComponent
-    ,children:[
-      {path:':id',component:StoryComponent,children:[
-        { path:':id/plots',component:DaoPlotListComponent}
-          // ,
-          // { path:'scenes',component:SceneListComponent},
-          // { path:'people',component:PeopleListComponent},
-          // { path:'events',component:EventListComponent},
-          // { path:'locations',component:LocationListComponent},
-          // { path:'things',component:ThingsListComponent}]}
-    ]}
+    component: StoryListComponent,children:[
+      {path:':id',component:StoryComponent},
+      {path:':id', component:StoryDashboardComponent,outlet:'dashboard'}
       ]
-
   },
   {
     path: 'profile',

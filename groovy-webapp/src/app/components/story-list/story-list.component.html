@@ -19,12 +19,9 @@
       </li>
 
 
-
     </div>
   </div>
 </nav>
-
-
 
 
 <div class="row">
@@ -35,14 +32,26 @@
         <thead>
         <tr>
           <th>Title</th>
+          <th>Detail</th>
           <th>Action</th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let story of stories$|async">
-          <td><a class="link-primary" [routerLink]="[story.id]">{{story.title}}</a></td>
-<!--         <td><a class="link-primary" (click)="select(story)">{{story.title}}</a></td>-->
-          <td><a class="link-danger" (click)="delete(story)">Delete</a></td>
+          <td>
+            <a class="link-primary" (click)="triggerStory(story.id)">  {{story.title}} </a>
+<!--               [routerLink]="[story.id]"-->
+
+          </td>
+
+
+          <td>
+            <a class="link-primary" [routerLink]="[{outlets: {dashboard:[story.id]}}]"> Detail </a>
+          </td>
+
+          <td>
+            <a class="link-danger" (click)="delete(story)">Delete</a>
+          </td>
         </tr>
         </tbody>
 
@@ -51,15 +60,15 @@
     </div>
   </div>
 
-<!--  <div class="col-md-8">-->
-<!--    <div *ngIf="story">-->
-<!--      <app-story-->
-<!--        [story]="story"-->
-<!--      ></app-story>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
- <div class="col-md-8">
+  <!--  <div class="col-md-8">-->
+  <!--    <div *ngIf="story">-->
+  <!--      <app-story-->
+  <!--        [story]="story"-->
+  <!--      ></app-story>-->
+  <!--    </div>-->
+  <!--  </div>-->
+  <!--</div>-->
+  <div class="col-md-8">
     <div>
       <router-outlet></router-outlet>
     </div>
@@ -67,12 +76,12 @@
 </div>
 
 
-
 <div class="alert alert-danger" *ngIf="errorMessages">{{errorMessages}}</div>
 <!--<h1>Dashboard</h1>-->
 
 <hr>
 
-<app-story-dashboard *ngIf="story"
-[currentStory]="story"
-></app-story-dashboard>
+<!--<app-story-dashboard *ngIf="story"-->
+<!--[currentStory]="story"-->
+<!--&gt;</app-story-dashboard>-->
+<!--<router-outlet name="dashboard"></router-outlet>-->

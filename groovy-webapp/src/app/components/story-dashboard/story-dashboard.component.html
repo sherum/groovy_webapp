@@ -1,4 +1,4 @@
-<div *ngIf="currentStory" class="container">
+<div class="container">
   <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
       <button class="nav-link active" id="plots-tab" data-bs-toggle="tab" data-bs-target="#plots" type="button"
@@ -35,8 +35,8 @@
     <div class="container">
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="plots" role="tabpanel" aria-labelledby="plots-tab">
-          <!--<app-dao-plot-list [story]="currentStory" [plots]="plots"></app-dao-plot-list>-->
-          <router-outlet></router-outlet>
+          <app-dao-plot-list [plots]="plots"></app-dao-plot-list>
+
         </div>
         <div class="tab-pane fade" id="scenes" role="tabpanel" aria-labelledby="scenes-tab">...</div>
         <div class="tab-pane fade" id="people" role="tabpanel" aria-labelledby="people-tab">...</div>

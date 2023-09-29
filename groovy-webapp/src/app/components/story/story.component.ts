@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {IStory} from "../../models/story.model";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {StoryService} from "../../services/story.service";
 
 @Component({
@@ -12,19 +12,24 @@ export class StoryComponent implements OnInit {
   //@Input() story: IStory | undefined;
   story: IStory | undefined;
 
-  constructor(private route: ActivatedRoute, private storyService: StoryService) {}
+  constructor(private route: ActivatedRoute, private storyService: StoryService,private router:Router) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const sid = params.get('id');
       this.getStory(<string>sid);
 
+
+
     });
   }
 
   getStory(sid:string):void{
     this.storyService.getStory(sid).subscribe(
-      data => this.story = data
+      data => {
+        this.story = data;
+
+      }
     )
   }
 

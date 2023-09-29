@@ -8,18 +8,18 @@
             <div class="col-4">
 
 
-                <ul  *ngIf="story">
+                <ul  *ngIf="plots">
                     <li *ngFor="let dao of plots">
                          <!-- <li *ngFor="let dao of daoList$ |async">-->
 
-                        <app-dao-plot [dao]="dao"></app-dao-plot>
+                        <app-dao-plot [dao]="dao" (selectedPlot)="setActivePlot($event)" ></app-dao-plot>
                     </li>
                 </ul>
             </div>
-            <div class="col">
+            <div class="col" *ngIf="currentPlot">
                 <!--      no need for parent-child access need service observable-->
-                <app-dao-form *ngIf="selectedDao$"
-                              [dao]="selectedDao$ | async"
+                <app-dao-form
+                              [dao]="currentPlot"
                               (deletePlot)="delete($event)"
                               (savePlot)="save($event)"
                               (createSubplot)="addSubplot($event)"

@@ -66,4 +66,9 @@ export class StoryListComponent implements OnInit {
      .then(r => this.router.navigate(['stories']));
   }
 
+  triggerStory(id:string):void{
+    this.router.navigate(['/stories',id]);
+
+  }
+
 }

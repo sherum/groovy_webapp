@@ -11,6 +11,7 @@ export class DaoPlotComponent implements OnInit {
 
     // @ts-ignore
     @Input() dao: IPlotView;
+    @Output() selectedPlot = new EventEmitter<IPlotView>();
 
 
 
@@ -22,7 +23,7 @@ export class DaoPlotComponent implements OnInit {
 
     showDetail() {
         console.log("Show detail calls plot service with:", this.dao);
-        this.plotService.setCurrentPlot(this.dao);
+        this.selectedPlot.emit(this.dao);
     }
 
     ngOnInit(): void {
