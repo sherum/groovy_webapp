@@ -76,17 +76,29 @@ export class Story implements IStory {
 
 }
 
-
-export const newStory: IStory = {
-    title: "New story",
-    id: "0",
-    author: "New Author",
-    genre: "Fiction",
-    maguffin: "A gripping tale",
-    summary: "A synopsis of the idea"
+export class PlotBuilder{
+  static create(name:string):IPlotView{
+    return  {
+      topPlot: false,
+      "name":name,
+      "type":"Story, Arc, Domain",
+      "description":"A placeholder plot"
+    }
+  }
 }
 
-export const data: IStory[] = [
+
+export const newStory: IStory = {
+    title: "An Unexpected Erection",
+    id: "0",
+    author: "Levi Woodyard",
+    genre: "Mystery-Occult",
+    maguffin: "A man wakes up a new building outside his window that no one thinks is out of place",
+    summary: "The PROT experiences discontinuity in his reality and seeks to uncover the source"
+}
+
+
+export const data: Story =
 
     {
         "events": [
@@ -95,7 +107,7 @@ export const data: IStory[] = [
                 "description": "Flight 1509 explodes",
                 "id": "1124",
                 "location": "7635",
-                "topPlot": false,
+
                 "name": "Air Disaster",
                 "plot": "asdn",
                 "type": "Maguffin"
@@ -106,13 +118,13 @@ export const data: IStory[] = [
             {
                 "description": "A pasture over Kentucky, 100 miles NW of the Nashville airport.",
                 "id": "7635",
-                "topPlot": false,
+
                 "name": "Crash site one and two"
             },
             {
                 "description": "An unremarkable two story warehouse with basement in the SE side of Nashville's industrial district.",
                 "id": "3472",
-                "topPlot": false,
+
                 "name": "Nashville Bi-Weekly"
             }
         ],
@@ -121,14 +133,14 @@ export const data: IStory[] = [
             {
                 "description": "Main character, journalist by trade.",
                 "id": "1029",
-                "topPlot": false,
+
                 "name": "Felicia Martin",
                 "type": "PROT"
             },
             {
                 "description": "Employeer,editor and owner of Nashville Bi-Weekly",
                 "id": "1034",
-                "topPlot": false,
+
                 "name": "Rex Grambone",
                 "type": "SUPP"
             }
@@ -178,7 +190,7 @@ export const data: IStory[] = [
                 "events": [],
                 "id": "0926",
                 "location": "3472",
-                "topPlot": false,
+
                 "name": "Grip and Grin",
                 "parentId": "djri",
                 "people": [
@@ -191,15 +203,15 @@ export const data: IStory[] = [
             }
         ],
         "id": "124567890",
+      "author":"Levi Woodyard",
         "summary": "After narrowly escaping her own murder ending her last undercover reporting job,  FM starts a traditional journalist's job the day of an air disaster. Her recent past and her failing sanity immediatly surface as she investigates the airliner's demise.",
         "things": [
             {
                 "description": "Felicia's Beretta 21A. A 22 cal pistol she is rarely without .",
                 "id": "9384",
-                "topPlot": false,
+
                 "name": "Buddy"
             }
         ],
-        "title": "Explosive Descent"
-    }
-];
+        "title": "Explosively Descent"
+    };

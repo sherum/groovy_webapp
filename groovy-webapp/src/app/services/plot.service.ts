@@ -26,6 +26,13 @@ export class PlotService {
         this.currentPlotSubject.next(plot);
     }
 
+    private nextDeletedPlotSubject = new Subject<IPlotView>();
+    nextPlotDeletedObserver$ = this.nextDeletedPlotSubject.asObservable();
+
+    setNextDeletedPlot(plot:IPlotView):void{
+      this.nextDeletedPlotSubject.next(plot);
+    }
+
     // getStoryPlots(sid:string):Observable<IPlotView[]> {
     //     return this.getPlots()
     //         .mergeMap((data) => data.plots) // [{id: 1}, {id: 4}, {id: 3}, ..., {id: N}]
@@ -92,7 +99,7 @@ export class PlotService {
 
     deletePlot(): void {
 
-        this.currentPlotObserver$.subscribe(
+        this.nextPlotDeletedObserver$.subscribe(
             {
                 next: plot => {
                     let uri = `${this.plotEndpoint}/${plot.id}`;

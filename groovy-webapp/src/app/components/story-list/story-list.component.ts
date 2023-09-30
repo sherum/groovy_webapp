@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {IStory} from "../../models/story.model";
+import {data, IStory} from "../../models/story.model";
 //import {catchError, combineLatest, EMPTY, map, merge, Observable, Subject, tap} from "rxjs";
 import {StoryService} from "../../services/story.service";
 import {filter, merge, scan} from "rxjs";
 import {Router} from "@angular/router";
+import {DataStore} from "aws-amplify";
 
 @Component({
   templateUrl: './story-list.component.html',
@@ -14,6 +15,8 @@ export class StoryListComponent implements OnInit {
 
 
   story: IStory | undefined;
+  DATA = data;
+
 
   errorMessages = ""
 
@@ -33,7 +36,7 @@ export class StoryListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.storyService.currentStoryObserver$.subscribe(
+      this.storyService.currentStoryObserver$.subscribe(
       storyData => this.story = storyData
     );
   }
@@ -65,4 +68,5 @@ export class StoryListComponent implements OnInit {
      .then(r => this.router.navigate(['stories']));
   }
 
+  protected readonly DataStore = DataStore;
 }

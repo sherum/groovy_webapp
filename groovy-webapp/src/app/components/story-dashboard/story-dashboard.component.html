@@ -24,9 +24,11 @@
     <div class="container">
         <div class="tab-content" id="myTabContent">
           <div class="tab-pane fade show active" id="plots" role="tabpanel" aria-labelledby="plots-tab">
-            <app-dao-plot-list [story]="currentStory" (update)="updateStory($event)"></app-dao-plot-list>
+            <app-dao-plot-list [plots]="storysub" ></app-dao-plot-list>
                 </div>
-            <div class="tab-pane fade" id="scenes" role="tabpanel" aria-labelledby="scenes-tab">...</div>
+            <div class="tab-pane fade" id="scenes" role="tabpanel" aria-labelledby="scenes-tab">
+
+            </div>
             <div class="tab-pane fade" id="people" role="tabpanel" aria-labelledby="people-tab">...</div>
             <div class="tab-pane fade" id="locations" role="tabpanel" aria-labelledby="locations-tab">...</div>
             <div class="tab-pane fade" id="events" role="tabpanel" aria-labelledby="events-tab">...</div>

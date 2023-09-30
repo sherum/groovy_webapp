@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {CognitoService, IUser} from "./cognito.service";
 import {BehaviorSubject, combineLatest, map, merge, Observable, of, scan, Subject, tap} from "rxjs";
 
-import {IStory, data, newStory} from "../models/story.model";
+import {IStory, data, newStory, Story} from "../models/story.model";
 
 
 @Injectable({
@@ -12,6 +12,7 @@ import {IStory, data, newStory} from "../models/story.model";
 export class StoryService {
 
   user: string | undefined;
+  baseStory = new Story(data);
 
   constructor(private http: HttpClient, private auth: CognitoService) {
   }
@@ -20,15 +21,16 @@ export class StoryService {
   storyEndpoint = `${this.url}/story`
   headers = new HttpHeaders({'Content-Type': 'application/json', 'Accept': 'application/json'});
 
-  private currentStorySubject = new Subject<IStory|undefined>();
+  currentStorySubject = new BehaviorSubject<IStory>(this.baseStory);
   currentStoryObserver$ = this.currentStorySubject.asObservable();
 
   setCurrentStory(story: IStory) {
-   console.log("set current story");
+   console.log("set current story", JSON.stringify(story));
+
     this.currentStorySubject.next(story);
   }
 
-  private insertedStorySubject = new Subject<IStory>();
+  insertedStorySubject = new Subject<IStory>();
   insertedStory$ = this.insertedStorySubject.asObservable();
 
   // addStoryToStoryList(story: IStory): void {

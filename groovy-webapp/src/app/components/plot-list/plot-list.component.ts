@@ -74,4 +74,3 @@ export class PlotListComponent implements OnInit {
 
 }
 
-import {PlotService} from "../../services/plot.service";

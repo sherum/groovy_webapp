@@ -30,7 +30,7 @@
             </thead>
             <tbody>
             <tr *ngFor="let plot of plot$ | async">
-                <ng-container *ngIf="plot.topPlot">
+                <ng-container >
                 <td class="m-2"><a class="link link-primary" (click)="select(plot)"> {{plot?.name}} </a> </td>
                 <td class="m-2"><a class="link-danger" (click)="delete(plot)">Delete</a></td>
                 </ng-container>

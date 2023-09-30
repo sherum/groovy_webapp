@@ -39,6 +39,10 @@
         </tr>
         </thead>
         <tbody>
+        <tr>
+          <td><a class="link-primary" (click)="select(DATA)">{{DATA.title}}</a></td>
+          <td><a class="link-danger" (click)="delete(DATA)">Delete</a></td>
+        </tr>
         <tr *ngFor="let story of stories$|async">
           <td><a class="link-primary" (click)="select(story)">{{story.title}}</a></td>
           <td><a class="link-danger" (click)="delete(story)">Delete</a></td>
@@ -66,6 +70,9 @@
 
 <hr>
 
-<app-story-dashboard *ngIf="story"
-[currentStory]="story"
-></app-story-dashboard>
+<!--<app-story-dashboard *ngIf="story"-->
+<!--[currentStory]="story"-->
+<!--&gt;</app-story-dashboard>-->
+
+
+<app-story-dashboard></app-story-dashboard>

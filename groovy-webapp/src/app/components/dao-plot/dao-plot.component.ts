@@ -11,7 +11,7 @@ export class DaoPlotComponent implements OnInit {
 
     // @ts-ignore
     @Input() dao: IPlotView;
-
+    @Output() display = new EventEmitter<IPlotView>();
 
 
     constructor(private plotService: PlotService) {
@@ -20,9 +20,12 @@ export class DaoPlotComponent implements OnInit {
 
 
 
-    showDetail() {
-        console.log("Show detail calls plot service with:", this.dao);
-        this.plotService.setCurrentPlot(this.dao);
+    showDetail(plot:IPlotView) {
+
+      console.log("current plot is: ",plot);
+        // console.log("Show detail calls plot service with:", this.dao);
+        // this.plotService.setCurrentPlot(this.dao);
+      this.display.emit(plot);
     }
 
     ngOnInit(): void {
