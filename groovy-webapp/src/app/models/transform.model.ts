@@ -1,4 +1,4 @@
-import {IPlot} from "./story.model";
+import {IEvent, ILocation, IPerson, IPlot, IScene, IThing} from "./story.model";
 
 
 export interface IPlotView {
@@ -41,6 +41,9 @@ export class PlotView implements IPlotView {
         this.storyId = "";
     }
 }
+
+
+
 
 
 export const daos: IPlotView[] = [

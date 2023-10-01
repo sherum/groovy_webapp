@@ -55,7 +55,7 @@ export class PlotListComponent implements OnInit {
     save() {
         console.log("Save plot was pressed");
         this.plotService.setCurrentPlot(<IPlotView>this.selectedDao)
-        this.plotService.updatePlot();
+        this.plotService.updatePlot(this.story);
     }
 
 

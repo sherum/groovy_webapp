@@ -67,7 +67,7 @@ export class PlotService {
         return this.http.put<IPlotView>(uri, {}, {headers: this.headers});
     }
 
-    updatePlot(): void {
+    updatePlot(story:IStory): void {
         console.log("Before observable update");
         this.currentPlotObserver$.subscribe(data => console.log("Before updatePlot", data));
 
@@ -77,7 +77,10 @@ export class PlotService {
                     console.log("Updateplot current plot", plot);
                     this.http.put<IPlotView>(this.plotEndpoint, plot, {headers: this.headers}).subscribe(
                         {
-                            next: data => console.log("The uploaded plot.", plot),
+                            next: data => {
+                              story.plots?.push(data);
+                              this.storyService.updateStory(story);
+                            },
                             error: err => console.log("something went wrong in updatePlot ", err),
                             complete: () => this.getPlots().subscribe(data => console.log("Update result", plot))
                         })
@@ -141,17 +144,17 @@ export class PlotService {
      * return an empty plot with a new id assigned to parentid
      * @param parentId
      */
-    insertChildPlot(parent:IPlotView):void {
-        let uri = `${this.plotEndpoint}/subplot`
-        this.http.post<IPlotView>(uri, parent, {headers: this.headers}).subscribe(
-          data => this.setCurrentPlot(data)
-        );
-    }
+    // insertChildPlot(parent:IPlotView):void {
+    //     let uri = `${this.plotEndpoint}/subplot`
+    //     this.http.post<IPlotView>(uri, parent, {headers: this.headers}).subscribe(
+    //       data => this.setCurrentPlot(data)
+    //     );
+    // }
 
-    insertNewPlot(): Observable<IPlotView> {
-        let uri = `${this.plotEndpoint}/insert`
-        return this.http.post<IPlotView>(uri, {'storyId': "asdghj"}, {headers: this.headers})
-    }
+    // insertNewPlot(): Observable<IPlotView> {
+    //     let uri = `${this.plotEndpoint}/insert`
+    //     return this.http.post<IPlotView>(uri, {'storyId': "asdghj"}, {headers: this.headers})
+    // }
 
     savePlot(plot: IPlotView): Observable<IPlotView> {
         console.log("Saving this plot in plotService method 'savePlot' ", plot);

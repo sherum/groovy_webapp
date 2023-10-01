@@ -1,9 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {PlotService} from "../../services/plot.service";
 import {IPlotView, PlotView} from "../../models/transform.model";
-import {combineLatest, map, merge, Observable, scan} from "rxjs";
-import {IPlot, IStory} from "../../models/story.model";
-
+import {combineLatest, distinct, map, merge, Observable, scan} from "rxjs";
+import {IStory} from "../../models/story.model";
 
 @Component({
   selector: 'app-dao-plot-list',
@@ -16,22 +15,19 @@ export class DaoPlotListComponent implements OnInit {
   @Input() story: IStory;
 
   @Input() plots: IPlotView[] | undefined;
+
   showPlot: boolean = false;
   isChild = false;
 
   sid: string | undefined;
   currentStory: IStory | undefined;
-  currentPlot:IPlotView|undefined;
+  currentPlot: IPlotView | undefined;
   selectedDao$: Observable<IPlotView> = this.plotService.currentPlotObserver$;
+  processPlot:IPlotView[]|undefined;
 
-  storyPlots$ = this.plotService.getPlots()
-    .pipe(
-      map(plots =>
-        plots.filter(plot => this.story.id == plot.storyId))
-    );
 
   plots$ = combineLatest([
-    this.plotService.getPlots(),
+   this.plotService.getPlots(),
     this.plotService.selectedStory$
   ])
     .pipe(
@@ -39,7 +35,7 @@ export class DaoPlotListComponent implements OnInit {
         plots.filter((plot: IPlotView) =>
           // @ts-ignore
           plot.storyId == story.id)
-      )
+      ),
     );
 
   daoList$ = merge(
@@ -57,6 +53,7 @@ export class DaoPlotListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.plotService.selectedStory$.subscribe(
       nextstory => {
         this.currentStory = nextstory;
@@ -79,26 +76,37 @@ export class DaoPlotListComponent implements OnInit {
   }
 
   create(): void {
-    let childPLot:IPlotView;
-    if(this.childPlot()){
+    let childPLot: IPlotView;
+    if (this.childPlot()) {
       this.plotService.newPlot().subscribe(p => childPLot = p);
       this.selectedDao$.subscribe(currentPlot => {
         currentPlot.subplots?.push(childPLot);
-        this.plotService.updatePlot();
+        if (this.currentStory) {
+          this.plotService.updatePlot(this.currentStory);
+        }
         this.plotService.setCurrentPlot(childPLot);
       });
     } else {
       this.plotService.newPlot().subscribe(p => {
         childPLot = p
-         this.plotService.setCurrentPlot(childPLot);
-          this.plotService.selectedStory$.subscribe(story=> story.plots?.push(childPLot));
-     });
+        childPLot.topPlot = true;
+        this.plotService.setCurrentPlot(childPLot);
+        this.currentStory?.plots?.push(childPLot)
+        if (this.currentStory) {
+          this.plotService.updatePlot(this.currentStory);
+        }
+      });
     }
+
   }
+
+
 
   save(event: IPlotView): void {
     this.plotService.setCurrentPlot(<IPlotView>event)
-    this.plotService.updatePlot();
+    if (this.currentStory) {
+      this.plotService.updatePlot(this.currentStory);
+    }
   }
 
 
@@ -107,7 +115,7 @@ export class DaoPlotListComponent implements OnInit {
     this.plotService.deletePlot();
   }
 
-  setCurrent(event:IPlotView):void{
+  setCurrent(event: IPlotView): void {
     this.currentPlot = event;
   }
 

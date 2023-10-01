@@ -43,6 +43,8 @@ export interface IStory {
 
 }
 
+
+
 export class Story implements IStory {
 
     title = " ";

@@ -10,7 +10,7 @@
 
                 <ul *ngIf="plots">
 <!--                    <li *ngFor="let dao of daoList$ |async">-->
-                    <li *ngFor="let dao of plots">
+                    <li *ngFor="let dao of plots|uplots">
 
                         <app-dao-plot [dao]="dao" (display)="setCurrent(dao)"></app-dao-plot>
                     </li>

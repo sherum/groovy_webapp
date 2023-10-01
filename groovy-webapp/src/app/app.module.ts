@@ -20,6 +20,7 @@ import { PlotComponent } from './components/plot/plot.component';
 import { DaoPlotListComponent } from './components/dao-plot-list/dao-plot-list.component';
 import { DaoPlotComponent } from './components/dao-plot/dao-plot.component';
 import { DaoFormComponent } from './components/dao-form/dao-form.component';
+import {UniquePipe} from './services/unique-pipe.pipe';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { DaoFormComponent } from './components/dao-form/dao-form.component';
     PlotComponent,
     DaoPlotListComponent,
     DaoPlotComponent,
-    DaoFormComponent
+    DaoFormComponent,
+    UniquePipe
   ],
   imports: [
     BrowserModule,
