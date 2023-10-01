@@ -24,8 +24,8 @@ export class DaoPlotComponent implements OnInit {
 
       console.log("current plot is: ",plot);
         // console.log("Show detail calls plot service with:", this.dao);
-        // this.plotService.setCurrentPlot(this.dao);
-      this.display.emit(plot);
+        this.plotService.setCurrentPlot(plot);
+    // this.display.emit(plot);
     }
 
     ngOnInit(): void {

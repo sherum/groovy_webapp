@@ -20,6 +20,7 @@ constructor(private plotService:PlotService) {}
 
 
   addSubplot(): void {
+  console.log("create subplot");
   this.createSubplot.emit(this.dao);
   }
 

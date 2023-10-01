@@ -25,7 +25,6 @@ export class DaoPlotListComponent implements OnInit {
   selectedDao$: Observable<IPlotView> = this.plotService.currentPlotObserver$;
   processPlot:IPlotView[]|undefined;
 
-
   plots$ = combineLatest([
    this.plotService.getPlots(),
     this.plotService.selectedStory$
@@ -38,15 +37,15 @@ export class DaoPlotListComponent implements OnInit {
       ),
     );
 
-  daoList$ = merge(
-    this.plots$,
-    this.plotService.insertedPlot$
-  ).pipe(
-    scan((acc, value) =>
-        (value instanceof Array) ?
-          [...value] : [...acc, value],
-      [] as IPlotView[]),
-  );
+  // daoList$ = merge(
+  //   this.plots$,
+  //   this.plotService.insertedPlot$
+  // ).pipe(
+  //   scan((acc, value) =>
+  //       (value instanceof Array) ?
+  //         [...value] : [...acc, value],
+  //     [] as IPlotView[]),
+  // );
 
 
   constructor(private plotService: PlotService) {
@@ -78,6 +77,7 @@ export class DaoPlotListComponent implements OnInit {
   create(): void {
     let childPLot: IPlotView;
     if (this.childPlot()) {
+      console.log("child plot flow");
       this.plotService.newPlot().subscribe(p => childPLot = p);
       this.selectedDao$.subscribe(currentPlot => {
         currentPlot.subplots?.push(childPLot);
@@ -117,6 +117,20 @@ export class DaoPlotListComponent implements OnInit {
 
   setCurrent(event: IPlotView): void {
     this.currentPlot = event;
+    this.plotService.setCurrentPlot(event);
+  }
+
+  addSubplot():void{
+    this.selectedDao$.subscribe(
+      parent => {
+        this.plotService.addSubplot(parent).subscribe(data => {
+          this.plotService.setCurrentPlot(data)
+        });
+
+      }
+    )
+
+    // this.plotService.updatePlot(this.story);
   }
 
 }

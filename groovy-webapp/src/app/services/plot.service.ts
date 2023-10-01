@@ -89,6 +89,11 @@ export class PlotService {
         )
     }
 
+    addSubplot(parentPlot:IPlotView):Observable<IPlotView>{
+      let uri = `${this.plotEndpoint}/subplot`;
+      return this.http.post<IPlotView>(uri,parentPlot,{headers:this.headers});
+    }
+
 // updatePlot(plotView: IPlotView): void {
 //
 //         this.http.put<IPlotView>(this.plotEndpoint, plotView, {headers: this.headers}).subscribe(
