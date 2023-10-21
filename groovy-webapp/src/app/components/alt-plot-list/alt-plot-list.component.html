@@ -1,0 +1,59 @@
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+      <li>
+
+        <a class="link link-success mx-2" (click)="create()">New Plot</a>
+      </li>
+
+      <li>
+        <a class="link link-primary mx-2" (click)="update()">Save</a>
+      </li>
+
+
+      <li>
+      </li>
+    </ul>
+
+    <div class="d-flex">
+
+
+    </div>
+  </div>
+</nav>
+
+
+<div class="row">
+  <div class="col-md-3 ">
+    <div *ngFor="let plot of plots">
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Delete</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td><a class="link" (click)="select(plot)">{{plot.name}}</a></td>
+          <td><a class="link" (click)="createSubplot(plot)">add subplot</a></td>
+          <td><a class="link" (click)="delete(plot)">delete</a></td>
+          <!--                <plot-list-view-->
+          <!--            [plot]="plot"-->
+          <!--            [plots]="plots"-->
+          <!--            (deleteMe)="delete($event)"></plot-list-view>-->
+        </tr>
+        </tbody>
+
+      </table>
+
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div *ngIf="plot != undefined">
+      <app-alt-plot [plot]="plot|async"
+                (savePlot)="save()"></app-alt-plot>
+    </div>
+  </div>
+</div>
