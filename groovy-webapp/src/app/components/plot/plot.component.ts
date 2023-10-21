@@ -1,7 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {IPlot} from "../../models/story.model";
 import {ActivatedRoute} from "@angular/router";
 import {parseMappings} from "@angular/compiler-cli/src/ngtsc/sourcemaps/src/source_file";
+import {async, Observable} from "rxjs";
+import {PlotService} from "../../services/plot.service";
 
 @Component({
   selector: 'app-plot',
@@ -9,16 +11,17 @@ import {parseMappings} from "@angular/compiler-cli/src/ngtsc/sourcemaps/src/sour
   styleUrls: ['./plot.component.css']
 })
 export class PlotComponent implements OnInit{
-  plot:IPlot|undefined;
-
-  constructor(private route:ActivatedRoute) {
+ @Input() plot:IPlot|undefined;
+ @Output() savePlot = new EventEmitter();
+  constructor(private plotService:PlotService) {
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(
-      params=> {
-        console.log(params.get('id)'));
-      }
-    );
+
   }
+  save(){
+   this.plotService.updateCurrentPlot(<IPlot>this.plot);
+   this.savePlot.emit();
+  }
+
 }

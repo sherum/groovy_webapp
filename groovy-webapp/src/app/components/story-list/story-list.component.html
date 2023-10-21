@@ -39,9 +39,10 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let story of stories">
-          <td><a class="link-primary" (click)="select(story.id)">{{story.title}}</a></td>
-          <td><a class="link-danger" (click)="delete(story.id)">Delete</a></td>
+
+        <tr *ngFor="let stori of stories" [ngClass]="{'selected-row': stori ==  story }">
+          <td><a class="link-primary" (click)="select(stori.id)">{{stori.title}}</a></td>
+          <td><a class="link-danger" (click)="delete(stori.id)">Delete</a></td>
         </tr>
         </tbody>
 
@@ -52,9 +53,10 @@
 
   <div class="col-md-8">
     <div *ngIf="story">
-      <app-story
-        [story]="story"
-      ></app-story>
+<!--      <app-story-->
+<!--        [story]="story"-->
+<!--      ></app-story>-->
+      <app-story></app-story>
     </div>
   </div>
 </div>
@@ -82,11 +84,13 @@
   </li>
 </ul>
 <div class="row">
-<div class="col-md-4">
+<!--<div class="col-md-4">-->
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="plots" role="tabpanel" aria-labelledby="plots-tab">
-    <app-plot-list [storyId]="story?.id"
-      [plots]="story.plots"></app-plot-list></div>
+<!--    <app-plot-list [storyId]="story?.id"-->
+<!--      [plots]="story.plots"></app-plot-list></div>-->
+    <app-plot-list></app-plot-list></div>
+
   <div class="tab-pane fade" id="scenes" role="tabpanel" aria-labelledby="scenes-tab">...</div>
   <div class="tab-pane fade" id="people" role="tabpanel" aria-labelledby="people-tab">...</div>
   <div class="tab-pane fade" id="locations" role="tabpanel" aria-labelledby="locations-tab">...</div>
@@ -95,10 +99,10 @@
 </div>
 
   </div>
-  <div class="col-md-6">
-    <router-outlet></router-outlet>
-  </div>
-</div>
+<!--  <div class="col-md-6">-->
+<!--    <router-outlet></router-outlet>-->
+<!--  </div>-->
+<!--</div>-->
 
 
 

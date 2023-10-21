@@ -27,15 +27,19 @@ const routes: Routes = [
       },
     ],
   },
+  // {
+  //   path: 'stories',
+  //   component: StoryListComponent,
+  //     children:[
+  //         {
+  //             path: 'plots/:id',
+  //             component: PlotComponent,
+  //         },
+  //     ],
+  // },
   {
     path: 'stories',
-    component: StoryListComponent,
-      children:[
-          {
-              path: 'plots/:id',
-              component: PlotComponent,
-          },
-      ],
+    component: StoryListComponent
   },
   {
       component: ProfileComponent,

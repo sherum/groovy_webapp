@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable, signal} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {CognitoService} from "./cognito.service";
 import {Observable} from "rxjs";
@@ -11,7 +11,7 @@ import {StoryService} from "./story.service";
 })
 export class PlotService {
 
-
+  currentPlot = signal<IPlot>({name:"new plot"})
   constructor(private http: HttpClient,private storyService:StoryService) {
 
   }
@@ -22,6 +22,11 @@ export class PlotService {
   headers = new HttpHeaders({'Content-Type': 'application/json', 'Accept': 'application/json'});
 
 
+  updateCurrentPlot(plot:IPlot){
+    this.currentPlot.update(()=>plot);
+    console.log("after current plot update, ", this.currentPlot());
+  }
+
   getPlots(): Observable<IPlot[]> {
     return this.http.get<IPlot[]>(this.getPlotsUri, {headers: this.headers});
   }
@@ -31,11 +36,10 @@ export class PlotService {
   // }
 
   newPlot(): Observable<IPlot> {
-    let storyId= this.storyService.currentStoryId;
-    console.log("New PLot CHeking storyId ",storyId);
-    let payload= "AAA"+storyId;
-    let uri= `${this.getPlotsUri}/new`;
-    return this.http.post<IPlot>(uri, payload,
+    // let storyId= this.storyService.currentStoryId;
+    // console.log("New PLot CHeking storyId ",storyId);
+    let uri= `${this.getPlotsUri}`;
+    return this.http.post<IPlot>(uri, {},
         {headers:this.headers});
   }
 
@@ -47,9 +51,14 @@ export class PlotService {
     )
   }
 
-  delete(storyid:string,plotId:string):Observable<any>{
-    let uri = this.getPlotsUri+`/${storyid}/${plotId}`;
+  delete(plotId:string):Observable<any>{
+    let uri = this.getPlotsUri+`/${plotId}`;
     return this.http.delete(uri,{headers:this.headers});
+  }
+
+  addSubplot(parentId:string):Observable<IPlot>{
+    let uri = `${this.getPlotsUri}/subplot`;
+    return this.http.post<IPlot>(uri,parentId,{headers:this.headers});
   }
 
 }

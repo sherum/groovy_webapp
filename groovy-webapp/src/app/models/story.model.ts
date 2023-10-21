@@ -5,6 +5,8 @@ export interface IPlot{
   parentId?:string;
   description?:string;
 }
+
+
 export interface IPerson{
   name:string;
   id?:string;
@@ -32,8 +34,6 @@ export interface IStory{
   events?:IEvent[];
   locations?:ILocation[];
   things?:IThing[];
-
-
 }
 
 
@@ -46,7 +46,7 @@ export const newStory:IStory  = {
   summary:"A synopsis of the idea"
 }
 
-export const data:IStory[] = [
+export const defaultStory:IStory =
 
   {
     "events": [
@@ -146,6 +146,5 @@ export const data:IStory[] = [
         "name": "Buddy"
       }
     ],
-    "title": "Explosive Descent"
-  }
-];
+    "title": "Sample Story"
+  };

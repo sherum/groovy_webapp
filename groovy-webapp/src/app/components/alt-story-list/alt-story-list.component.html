@@ -1,63 +1,116 @@
 <nav class="navbar navbar-expand-lg">
-    <div class="container">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li>
+  <div class="container">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li>
 
-                <button class="btn btn-outline-primary  my-2" (click)="create()">New Story</button>
-            </li>
-            <li>
-            </li>
-        </ul>
+        <button class="btn btn-outline-primary  my-2" (click)="create()">New Story</button>
+      </li>
+      <li>
+      </li>
+    </ul>
 
-        <div class="d-flex">
+    <div class="d-flex">
 
-            <li class="nav-link">
-                <a class="btn btn-primary my-2" (click)="save()">Save</a>
-            </li>
-            <li class="nav-link">
-                <a class="btn btn-success my-2" (click)="sync()">Toggle Form</a>
-            </li>
+      <li class="nav-link">
+        <a class="btn btn-primary my-2" (click)="save()">Save</a>
+      </li>
+      <li class="nav-link">
+        <a class="btn btn-success my-2" (click)="sync()">Toggle Form</a>
+      </li>
 
 
-
-        </div>
     </div>
+  </div>
 </nav>
-
-
 
 
 <div class="row">
 
-    <div class="col-md-3 ">
-        <div *ngIf="stories">
-            <table class="table table-bordered">
-                <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let story of stories">
-                    <td><a class="link-primary" (click)="select(story.id)">{{story.title}}</a></td>
-                    <td><a class="link-danger" (click)="delete(story.id)">Delete</a></td>
-                </tr>
-                </tbody>
+  <div class="col-md-3 ">
+    <div *ngIf="stories">
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+          <th>Title</th>
+          <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let story of stories">
+          <td><a class="link-primary" (click)="select(story.id)">{{story.title}}</a></td>
+          <td><a class="link-danger" (click)="delete(story.id)">Delete</a></td>
+        </tr>
+        </tbody>
 
-            </table>
+      </table>
 
-        </div>
     </div>
+  </div>
 
-        <div *ngIf="story">
+  <div *ngIf="story">
     <div class="col-md-8">
-            <app-story
-                    [story]="story"
-            ></app-story>
-        </div>
+      <!--            <app-story-->
+      <!--                    [story]="story"-->
+      <!--            ></app-story>-->
+      <app-alt-story></app-alt-story>
     </div>
-<div class="alert alert-danger" *ngIf="errorMessages">{{errorMessages}}</div>
-<app-story-dashboard
-    [story]="story"></app-story-dashboard>
-</div>
+  </div>
+  <div class="alert alert-danger" *ngIf="errorMessages">{{errorMessages}}</div>
+  <!-------------------------------------------START THE STORY SPECIFIC DETAILS ------------------------------------->
+  <div *ngIf="story" class="container">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="plots-tab" data-bs-toggle="tab" data-bs-target="#plots" type="button"
+                role="tab" aria-controls="plots" aria-selected="true">Plots
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="scenes-tab" data-bs-toggle="tab" data-bs-target="#scenes" type="button" role="tab"
+                aria-controls="scenes" aria-selected="false">Scenes
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="people-tab" data-bs-toggle="tab" data-bs-target="#people" type="button" role="tab"
+                aria-controls="people" aria-selected="false">People
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="locations-tab" data-bs-toggle="tab" data-bs-target="#locations" type="button"
+                role="tab" aria-controls="locations" aria-selected="true">Locations
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="events-tab" data-bs-toggle="tab" data-bs-target="#events" type="button" role="tab"
+                aria-controls="events" aria-selected="false">Events
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="things-tab" data-bs-toggle="tab" data-bs-target="#things" type="button" role="tab"
+                aria-controls="things" aria-selected="false">Things
+        </button>
+      </li>
+    </ul>
+    <div class="row">
+      <!--<div class="col-md-4">-->
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="plots" role="tabpanel" aria-labelledby="plots-tab">
+          <!--    <app-plot-list [storyId]="story?.id"-->
+          <!--      [plots]="story.plots"></app-plot-list></div>-->
+          <app-alt-plot-list></app-alt-plot-list>
+        </div>
+
+        <div class="tab-pane fade" id="scenes" role="tabpanel" aria-labelledby="scenes-tab">...</div>
+        <div class="tab-pane fade" id="people" role="tabpanel" aria-labelledby="people-tab">...</div>
+        <div class="tab-pane fade" id="locations" role="tabpanel" aria-labelledby="locations-tab">...</div>
+        <div class="tab-pane fade" id="events" role="tabpanel" aria-labelledby="events-tab">...</div>
+        <div class="tab-pane fade" id="things" role="tabpanel" aria-labelledby="things-tab">...</div>
+      </div>
+
+    </div>
+    <!--  <div class="col-md-6">-->
+    <!--    <router-outlet></router-outlet>-->
+    <!--  </div>-->
+    <!--</div>-->
+
+
+  </div>

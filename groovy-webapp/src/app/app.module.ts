@@ -19,6 +19,9 @@ import { PlotComponent } from './components/plot/plot.component';
 import { PlotListViewComponent } from './components/plot-list-view/plot-list-view.component';
 import { StoryDashboardComponent } from './components/story-dashboard/story-dashboard.component';
 import { AltStoryListComponent } from './components/alt-story-list/alt-story-list.component';
+import { AltStoryComponent } from './components/alt-story/alt-story.component';
+import { AltPlotListComponent } from './components/alt-plot-list/alt-plot-list.component';
+import { AltPlotComponent } from './components/alt-plot/alt-plot.component';
 
 
 @NgModule({
@@ -35,7 +38,10 @@ import { AltStoryListComponent } from './components/alt-story-list/alt-story-lis
     PlotComponent,
     PlotListViewComponent,
     StoryDashboardComponent,
-    AltStoryListComponent
+    AltStoryListComponent,
+    AltStoryComponent,
+    AltPlotListComponent,
+    AltPlotComponent
   ],
   imports: [
     BrowserModule,

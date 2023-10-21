@@ -7,7 +7,7 @@
       </li>
 
       <li>
-        <a class="link link-primary mx-2" (click)="save()">Save</a>
+        <a class="link link-primary mx-2" (click)="update()">Save</a>
       </li>
 
 
@@ -23,28 +23,37 @@
 </nav>
 
 
-
-  <div class="col-md-10 ">
+<div class="row">
+  <div class="col-md-3 ">
     <div *ngFor="let plot of plots">
-<!--      <table class="table table-bordered">-->
-<!--        <thead>-->
-<!--        <tr>-->
-<!--          <th>Name</th>-->
-<!--          <th>Parent Plot</th>-->
-<!--          <th>Delete</th>-->
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Delete</th>
 
-<!--        </tr>-->
-<!--        </thead>-->
-<!--        <tbody>-->
-                <plot-list-view
-            [plot]="plot"
-            [plots]="plots"
-            (deleteMe)="delete($event)"></plot-list-view>
-<!--        </tr>-->
-<!--        </tbody>-->
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td><a class="link" (click)="select(plot)">{{plot.name}}</a></td>
+           <td><a class="link" (click)="createSubplot(plot)">add subplot</a></td>
+          <td><a class="link" (click)="delete(plot)">delete</a></td>
+<!--                <plot-list-view-->
+<!--            [plot]="plot"-->
+<!--            [plots]="plots"-->
+<!--            (deleteMe)="delete($event)"></plot-list-view>-->
+        </tr>
+        </tbody>
 
-<!--      </table>-->
+      </table>
 
     </div>
   </div>
-
+<div class="col-md-8">
+  <div *ngIf="plot != undefined">
+    <app-plot [plot]="plot|async"
+    (savePlot)="save()"></app-plot>
+  </div>
+</div>
+</div>
