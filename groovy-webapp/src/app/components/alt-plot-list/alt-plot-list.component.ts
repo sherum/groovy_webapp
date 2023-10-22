@@ -14,14 +14,15 @@ export class AltPlotListComponent {
 
 
   story: IStory = this.storyService.currentDnStory();
-  plot: Observable<IPlot> | undefined;
+  plot$: Observable<IPlot> | undefined;
   plots = this.story.plots ? this.story.plots : [];
+  activePlot = this.storyService.currentDnPlot()
 
   constructor(private storyService: DnStoryService) {
     effect(() => {
       this.story = this.storyService.currentDnStory();
       this.plots = this.story.plots ? this.story.plots : [];
-      this.plot = undefined;
+      this.plot$ = undefined;
     });
   }
 
@@ -52,12 +53,11 @@ export class AltPlotListComponent {
 
   }
 
-  setParent(event: any): void {
-    console.log("Set Parent  ", event);
-  }
+
 
   select(plot: IPlot) {
-    this.plot = of(plot);
+    this.storyService.updateCurrentPlot(plot);
+    this.plot$ = of(this.storyService.currentDnPlot());
   }
 
 

@@ -4,6 +4,7 @@ export interface IPlot{
   type?:string;
   parentId?:string;
   description?:string;
+  subplots?:IPlot[];
 }
 
 
@@ -94,29 +95,34 @@ export const defaultStory:IStory =
         "id": "asdn",
         "name": "main",
         "parentId": "0",
-        "type": "story"
+        "type": "story",
+        "subplots": [
+          {
+            "description": "Felcia's boss puts her in charge of the investigaton knowing she is unhinged.",
+            "id": "djri",
+            "name": "Act 1",
+            "parentId": "asdn",
+            "type": "story",
+            "subplots":[
+              {
+                "description": "Establish Felicia is crazy/PTSD coming off her last job.",
+                "id": "5647",
+                "name": "PROT development",
+                "parentId": "djri",
+                "type": "arc",
+                "subplots": []
+              }
+            ]
+          }]
       },
       {
         "description": "PROT comes to terms with her core beliefs about her faith and what is real.",
         "id": "1234",
         "name": "PROT development",
         "parentId": "0",
-        "type": "arc"
+        "type": "arc",
+        "subplots":[]
       },
-      {
-        "description": "Felcia's boss puts her in charge of the investigaton knowing she is unhinged.",
-        "id": "djri",
-        "name": "Act 1",
-        "parentId": "asdn",
-        "type": "story"
-      },
-      {
-        "description": "Establish Felicia is crazy/PTSD coming off her last job.",
-        "id": "5647",
-        "name": "PROT development",
-        "parentId": "djri",
-        "type": "arc"
-      }
     ],
     "scenes": [
       {

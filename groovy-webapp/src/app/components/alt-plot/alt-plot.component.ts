@@ -22,6 +22,10 @@ export class AltPlotComponent {
     this.savePlot.emit();
   }
 
+  select(plot:IPlot){}
+  createSubplot(plot:IPlot){}
+  delete(plot:IPlot){}
+
 }
 
 

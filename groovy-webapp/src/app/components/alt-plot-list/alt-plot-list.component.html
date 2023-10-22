@@ -24,18 +24,19 @@
 
 
 <div class="row">
-  <div class="col-md-3 ">
+  <div class="col-md-3 mx-2">
     <div *ngFor="let plot of plots">
       <table class="table table-bordered">
         <thead>
         <tr>
           <th>Name</th>
+          <th>Add Subplot</th>
           <th>Delete</th>
 
         </tr>
         </thead>
         <tbody>
-        <tr>
+        <tr [class.table-primary] ="plot.name == activePlot.name">
           <td><a class="link" (click)="select(plot)">{{plot.name}}</a></td>
           <td><a class="link" (click)="createSubplot(plot)">add subplot</a></td>
           <td><a class="link" (click)="delete(plot)">delete</a></td>
@@ -51,8 +52,8 @@
     </div>
   </div>
   <div class="col-md-8">
-    <div *ngIf="plot != undefined">
-      <app-alt-plot [plot]="plot|async"
+    <div *ngIf="plot$ != undefined">
+      <app-alt-plot [plot]="plot$|async"
                 (savePlot)="save()"></app-alt-plot>
     </div>
   </div>

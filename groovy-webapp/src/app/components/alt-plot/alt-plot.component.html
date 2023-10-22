@@ -1,5 +1,9 @@
-<form ngForm >
-  <div class="input-group mb-3">
+
+<form ngForm>
+  <a type="link" class="link-primary" (click)="save()">Add to Story</a>
+  <div class="col">
+
+  <div class="input-group mb-6">
     <div class="input-group-prepend">
       <span class="input-group-text" id="new-title">Name:</span>
     </div>
@@ -10,9 +14,8 @@
     <div class="input-group-prepend">
       <span class="input-group-text" id="new-type">Type:</span>
     </div>
-    <input class="form-control" type="text" name="type" id="es-type"  [(ngModel)]="plot.type"/>
+    <input class="form-control" type="text" name="type" id="es-type" [(ngModel)]="plot.type"/>
   </div>
-
 
 
   <div class="row">
@@ -23,7 +26,36 @@
       <textarea class="form-control" name="description" id="es-description" [(ngModel)]="plot.description"></textarea>
     </div>
   </div>
-  <button type="button" class="btn btn-primary" (click)="save()">Add</button>
+
+</div>
 </form>
+<div class="table-responsive">
+
+<table class="table" *ngIf="plot.subplots">
+  <div *ngFor="let sub of plot?.subplots">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Add Subplot</th>
+      <th>Delete</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td class="mx-1"><a class="link-primary" (click)="select(sub)">{{sub.name}}</a></td>
+      <td class="mx-1"><a class="link-success" (click)="createSubplot(sub)">add subplot</a></td>
+      <td class="mx-1"><a class="link-danger" (click)="delete(sub)">delete</a></td>
+      <!--                <plot-list-view-->
+      <!--            [plot]="plot"-->
+      <!--            [plots]="plots"-->
+      <!--            (deleteMe)="delete($event)"></plot-list-view>-->
+    </tr>
+    </tbody>
+  </div>
+</table>
+</div>
+
+
 
 
