@@ -44,12 +44,6 @@ export class AltStoryListComponent implements OnInit {
     console.log("Selected DN ID", id ? id : null);
     let selected = <IStory>this.stories?.find(story => story.id == id);
     this.storyService.updateCurrentStory(selected);
-    // @ts-ignore
-    //console.log("Selected ID", story.id?id:null);
-    // @ts-ignore
-    // this.storyService.updateCurrentStory(story);
-    //this.storyService.setCurrentStory(this.story.id);
-    // this.story = this.stories?.find(story => story.id == this.storyService.currentDnStory().id);
 
   }
 

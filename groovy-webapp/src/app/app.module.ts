@@ -22,6 +22,16 @@ import { AltStoryListComponent } from './components/alt-stories/alt-story-list/a
 import { AltStoryComponent } from './components/alt-stories/alt-story/alt-story.component';
 import { AltPlotListComponent } from './components/alt-plots/alt-plot-list/alt-plot-list.component';
 import { AltPlotComponent } from './components/alt-plots/alt-plot/alt-plot.component';
+import { AltPeopleListComponent } from './components/alt-people/alt-people-list/alt-people-list.component';
+import { AltPersonComponent } from './components/alt-people/alt-person/alt-person.component';
+import { AltEventsListComponent } from './components/alt-event/alt-events-list/alt-events-list.component';
+import { AltEventComponent } from './components/alt-event/alt-event/alt-event.component';
+import { AltLocationsListComponent } from './components/alt-location/alt-locations-list/alt-locations-list.component';
+import { AltLocationComponent } from './components/alt-location/alt-location/alt-location.component';
+import { AltThingsListComponent } from './components/alt-thing/alt-things-list/alt-things-list.component';
+import { AltThingComponent } from './components/alt-thing/alt-thing/alt-thing.component';
+import { AltScenesListComponent } from './components/alt-scene/alt-scenes-list/alt-scenes-list.component';
+import { AltSceneComponent } from './components/alt-scene/alt-scene/alt-scene.component';
 
 
 @NgModule({
@@ -41,7 +51,17 @@ import { AltPlotComponent } from './components/alt-plots/alt-plot/alt-plot.compo
     AltStoryListComponent,
     AltStoryComponent,
     AltPlotListComponent,
-    AltPlotComponent
+    AltPlotComponent,
+    AltPeopleListComponent,
+    AltPersonComponent,
+    AltEventsListComponent,
+    AltEventComponent,
+    AltLocationsListComponent,
+    AltLocationComponent,
+    AltThingsListComponent,
+    AltThingComponent,
+    AltScenesListComponent,
+    AltSceneComponent
   ],
   imports: [
     BrowserModule,

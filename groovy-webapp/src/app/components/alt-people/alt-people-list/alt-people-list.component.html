@@ -1,0 +1,55 @@
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+      <li>
+
+        <a class="link link-success mx-2" (click)="create()">New Person</a>
+      </li>
+
+      <li>
+        <a class="link link-primary mx-2" (click)="update()">Save</a>
+      </li>
+
+
+      <li>
+      </li>
+    </ul>
+
+    <div class="d-flex">
+
+
+    </div>
+  </div>
+</nav>
+
+
+<div class="row">
+  <div class="col-md-3 mx-2">
+    <div *ngFor="let person of people">
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Delete</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr [class.table-primary] ="person.name == activePlot.name">
+          <td><a class="link" (click)="select(person)">{{person.name}}</a></td>
+          <td><a class="link" (click)="delete(person)">delete</a></td>
+        </tr>
+        </tbody>
+
+      </table>
+
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div *ngIf="person$ != undefined">
+      <app-alt-person [person]="person$|async"
+                    (savePerson)="save()"></app-alt-person>
+    </div>
+  </div>
+</div>
+

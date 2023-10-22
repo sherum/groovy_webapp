@@ -1,0 +1,56 @@
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <li>
+
+                <a class="link link-success mx-2" (click)="create()">New Thing</a>
+            </li>
+
+            <li>
+                <a class="link link-primary mx-2" (click)="update()">Save</a>
+            </li>
+
+
+            <li>
+            </li>
+        </ul>
+
+        <div class="d-flex">
+
+
+        </div>
+    </div>
+</nav>
+
+
+<div class="row">
+    <div class="col-md-3 mx-2">
+        <div *ngFor="let thing of things">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Delete</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr [class.table-primary] ="thing.name == activeThing.name">
+                    <td><a class="link" (click)="select(thing)">{{thing.name}}</a></td>
+                    <td><a class="link" (click)="delete(thing)">delete</a></td>
+                </tr>
+                </tbody>
+
+            </table>
+
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div *ngIf="thing$ != undefined">
+            <app-alt-thing [thing]="thing$|async"
+                              (saveThing)="save()"></app-alt-thing>
+        </div>
+    </div>
+</div>
+
+
