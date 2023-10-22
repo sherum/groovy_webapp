@@ -35,7 +35,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr [class.table-primary] ="person.name == activePlot.name">
+        <tr [class.table-primary] ="person.name == activePerson.name">
           <td><a class="link" (click)="select(person)">{{person.name}}</a></td>
           <td><a class="link" (click)="delete(person)">delete</a></td>
         </tr>

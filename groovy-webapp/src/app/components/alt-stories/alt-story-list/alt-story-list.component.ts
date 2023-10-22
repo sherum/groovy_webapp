@@ -1,6 +1,5 @@
 import {Component, computed, OnInit, signal, Signal} from '@angular/core';
 import {defaultStory, IStory} from "../../../models/story.model";
-import {toSignal} from "@angular/core/rxjs-interop";
 import {DnStoryService} from "../../../services/dn-story.service";
 
 @Component({

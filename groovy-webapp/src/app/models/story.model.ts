@@ -155,15 +155,17 @@ export const defaultStory: IStory =
         ],
         "scenes": [
             {
-                "events": [],
+                "name": "Grip and Grin",
                 "dtg": "12 May 2017:1200",
+                "plotpoints": "Felicia's inappropriate wardrobe and decorum show her disconnct with civil society.",
+                "setting": "Felicia arrives while Grambone is briefing the staff in the conference room.",
                 "id": "0926",
+                "events": [],
                 "location":  {
                     "description": "An unremarkable two story warehouse with basement in the SE side of Nashville's industrial district.",
                     "id": "3472",
                     "name": "Nashville Bi-Weekly"
                 },
-                "name": "Grip and Grin",
                 "people": [{
                     "description": "Main character, journalist by trade.",
                     "id": "1029",
@@ -179,8 +181,6 @@ export const defaultStory: IStory =
                     "type": "arc",
                     "subplots": []
                 },
-                "plotpoints": "Felicia's inappropriate wardrobe and decorum show her disconnct with civil society.",
-                "setting": "Felicia arrives while Grambone is briefing the staff in the conference room.",
                 "things": []
             }
         ],

@@ -1,6 +1,5 @@
 import {Component, effect} from '@angular/core';
 import {IStory} from "../../../models/story.model";
-import {StoryService} from "../../../services/story.service";
 import {DnStoryService} from "../../../services/dn-story.service";
 
 @Component({

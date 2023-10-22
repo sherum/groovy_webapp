@@ -6,12 +6,13 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {StoryService} from "./story.service";
+// import {StoryService} from "./story.service";
+import {DnStoryService} from "./dn-story.service";
 
 @Injectable()
 export class UserTokenInterceptor implements HttpInterceptor {
 
-  constructor(private storyService: StoryService) {
+  constructor(private storyService: DnStoryService) {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

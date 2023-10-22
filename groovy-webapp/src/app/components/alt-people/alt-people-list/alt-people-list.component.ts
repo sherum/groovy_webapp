@@ -13,14 +13,14 @@ export class AltPeopleListComponent {
   story: IStory = this.storyService.currentDnStory();
   person$: Observable<IPerson> | undefined;
   people = this.story.people ? this.story.people : [];
-  activePlot = this.storyService.currentDnPerson()
+  activePerson = this.storyService.currentDnPerson()
 
   constructor(private storyService: DnStoryService) {
     effect(() => {
       this.story = this.storyService.currentDnStory();
       this.people = this.story.people ? this.story.people : [];
       this.person$ = undefined;
-      console.log("constructor ",this.activePlot);
+      console.log("constructor ",this.activePerson);
     });
   }
 
