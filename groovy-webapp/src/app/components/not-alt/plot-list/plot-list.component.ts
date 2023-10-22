@@ -1,8 +1,8 @@
 import {Component, effect, Input} from '@angular/core';
 
-import {PlotService} from "../../services/plot.service";
-import {IPlot, IStory} from "../../models/story.model";
-import {StoryService} from "../../services/story.service";
+import {PlotService} from "../../../services/plot.service";
+import {IPlot, IStory} from "../../../models/story.model";
+import {StoryService} from "../../../services/story.service";
 import {Observable, of} from "rxjs";
 
 @Component({

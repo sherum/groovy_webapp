@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {IPlot} from "../../models/story.model";
+import {IPlot} from "../../../models/story.model";
 
 @Component({
   selector: 'plot-list-view',

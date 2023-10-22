@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {IPlot} from "../../models/story.model";
-import {DnStoryService} from "../../services/dn-story.service";
+import {IPlot} from "../../../models/story.model";
+import {DnStoryService} from "../../../services/dn-story.service";
 
 @Component({
   selector: 'app-alt-plot',

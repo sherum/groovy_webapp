@@ -1,16 +1,16 @@
-import {Component, computed, OnInit, signal, Signal} from '@angular/core';
-import {defaultStory, IStory} from "../../models/story.model";
-import {toSignal} from "@angular/core/rxjs-interop";
-import {DnStoryService} from "../../services/dn-story.service";
+import {Component, computed, OnInit} from '@angular/core';
+import {defaultStory, IStory} from "../../../models/story.model";
+//import {catchError, combineLatest, EMPTY, map, merge, Observable, Subject, tap} from "rxjs";
+import {StoryService} from "../../../services/story.service";
 
 @Component({
-  selector: 'app-alt-story-list',
-  templateUrl: './alt-story-list.component.html',
-  styleUrls: ['./alt-story-list.component.css']
-})
-export class AltStoryListComponent implements OnInit {
+  templateUrl: './story-list.component.html',
+  styleUrls: ['./story-list.component.css'],
 
-  activeStory = computed(() => this.storyService.currentDnStory);
+})
+export class StoryListComponent implements OnInit{
+
+  activeStory = computed(() => this.storyService.currentStory);
   // @ts-ignore
   story: IStory = this.activeStory();
   stories: IStory[] | undefined;
@@ -18,39 +18,33 @@ export class AltStoryListComponent implements OnInit {
   errorMessages = ""
 
 
-  constructor(private storyService: DnStoryService) {
-  }
+  constructor(private storyService: StoryService) {
+   }
 
 
-  ngOnInit() {
+ngOnInit(){
     this.storyService.getStories().subscribe(data => {
-      this.stories = data;
-      if (!this.stories?.find(story => story.id == defaultStory.id)) {
-        this.stories.push(defaultStory)
-      }
-    });
-
+        this.stories = data;
+        if (!this.stories?.find(story => story.id == defaultStory.id)){
+          this.stories.push(defaultStory)
+        }
+      });
   }
 
   save(): void {
-    console.log("save pressed")
+
+    console.log("save pressed...saving,");
+    // this.storyService.updateStory(currentStory);
     this.storyService.updateStory();
   }
 
-
   select(id: string) {
-
     // @ts-ignore
-    console.log("Selected DN ID", id ? id : null);
+    console.log("Selected ID", id ? id : null);
     let selected = <IStory>this.stories?.find(story => story.id == id);
     this.storyService.updateCurrentStory(selected);
     // @ts-ignore
-    //console.log("Selected ID", story.id?id:null);
-    // @ts-ignore
-    // this.storyService.updateCurrentStory(story);
-    //this.storyService.setCurrentStory(this.story.id);
-    // this.story = this.stories?.find(story => story.id == this.storyService.currentDnStory().id);
-
+    // this.storyService.setCurrentStory(this.story.id);
   }
 
   delete(id: string): void {
@@ -62,7 +56,7 @@ export class AltStoryListComponent implements OnInit {
         this.stories?.splice(idx, 1);
         // @ts-ignore
         this.storyService.updateCurrentStory(this.stories[idx - 1] ? this.stories[idx - 1] : defaultStory);
-        this.story = this.storyService.currentDnStory();
+        this.story = this.storyService.currentStory();
       },
       (err: any) => console.log(err)
     );
@@ -84,4 +78,3 @@ export class AltStoryListComponent implements OnInit {
   }
 
 }
-

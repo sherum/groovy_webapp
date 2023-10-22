@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {IStory} from "../../models/story.model";
+import {IStory} from "../../../models/story.model";
 
 @Component({
   selector: 'app-story-dashboard',

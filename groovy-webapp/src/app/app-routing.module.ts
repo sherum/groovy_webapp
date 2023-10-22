@@ -3,10 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 import {SignUpComponent} from "./components/sign-up/sign-up.component";
 import {HomeComponent} from "./components/home/home.component";
 import {AboutComponent} from "./components/about/about.component";
-import {StoryListComponent} from "./components/story-list/story-list.component";
+import {StoryListComponent} from "./components/not-alt/story-list/story-list.component";
 import {ProfileComponent} from "./components/profile/profile.component";
-import {PlotComponent} from "./components/plot/plot.component";
-import {AltStoryListComponent} from "./components/alt-story-list/alt-story-list.component";
+import {PlotComponent} from "./components/not-alt/plot/plot.component";
+import {AltStoryListComponent} from "./components/alt-stories/alt-story-list/alt-story-list.component";
 
 const routes: Routes = [
   {

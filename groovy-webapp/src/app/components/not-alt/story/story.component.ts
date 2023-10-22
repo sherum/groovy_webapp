@@ -1,6 +1,6 @@
 import {Component, effect, Input, signal} from '@angular/core';
-import {IStory} from "../../models/story.model";
-import {StoryService} from "../../services/story.service";
+import {IStory} from "../../../models/story.model";
+import {StoryService} from "../../../services/story.service";
 
 @Component({
   selector: 'app-story',
