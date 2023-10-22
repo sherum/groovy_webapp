@@ -43,12 +43,12 @@ export interface IScene {
     description?: string;
     "dtg"?: string;
     "setting"?: string;
-    "location"?: string;
+    "location"?: ILocation;
     "plotpoints"?: string; //how the plot intersects with the scene
-    "events"?: Array<string>;
-    "people"?: Array<string>;
-    "plot"?: Array<string>;
-    "things"?: Array<string>;
+    "events"?: Array<IEvent>;
+    "people"?: Array<IPerson>;
+    "plot"?: IPlot
+    "things"?: Array<IThing>;
 }
 
 
@@ -91,7 +91,7 @@ export const defaultStory: IStory =
                 "type": "Maguffin"
             }
         ],
-        "genre": "mystery",
+
         "locations": [
             {
                 "description": "A pasture over Kentucky, 100 miles NW of the Nashville airport.",
@@ -104,7 +104,6 @@ export const defaultStory: IStory =
                 "name": "Nashville Bi-Weekly"
             }
         ],
-        "maguffin": "A commercial airliner explodes as it prepares for its descent into Nashville",
         "people": [
             {
                 "description": "Main character, journalist by trade.",
@@ -156,20 +155,35 @@ export const defaultStory: IStory =
         ],
         "scenes": [
             {
-                "dtg": "12 May 2017:1200",
                 "events": [],
+                "dtg": "12 May 2017:1200",
                 "id": "0926",
-                "location": "3472",
+                "location":  {
+                    "description": "An unremarkable two story warehouse with basement in the SE side of Nashville's industrial district.",
+                    "id": "3472",
+                    "name": "Nashville Bi-Weekly"
+                },
                 "name": "Grip and Grin",
-                "people": ["1029"],
-                "plot":["5647"],
+                "people": [{
+                    "description": "Main character, journalist by trade.",
+                    "id": "1029",
+                    "name": "Felicia Martin",
+                    "type": "PROT"
+                }],
+                "plot":
+                    {
+                    "description": "Establish Felicia is crazy/PTSD coming off her last job.",
+                    "id": "5647",
+                    "name": "PROT development",
+                    "parentId": "djri",
+                    "type": "arc",
+                    "subplots": []
+                },
                 "plotpoints": "Felicia's inappropriate wardrobe and decorum show her disconnct with civil society.",
                 "setting": "Felicia arrives while Grambone is briefing the staff in the conference room.",
                 "things": []
             }
         ],
-        "id": "124567890",
-        "summary": "After narrowly escaping her own murder ending her last undercover reporting job,  FM starts a traditional journalist's job the day of an air disaster. Her recent past and her failing sanity immediatly surface as she investigates the airliner's demise.",
         "things": [
             {
                 "description": "Felicia's Beretta 21A. A 22 cal pistol she is rarely without .",
@@ -177,5 +191,9 @@ export const defaultStory: IStory =
                 "name": "Buddy"
             }
         ],
+        "genre": "mystery",
+        "maguffin": "A commercial airliner explodes as it prepares for its descent into Nashville",
+        "id": "124567890",
+        "summary": "After narrowly escaping her own murder ending her last undercover reporting job,  FM starts a traditional journalist's job the day of an air disaster. Her recent past and her failing sanity immediatly surface as she investigates the airliner's demise.",
         "title": "Sample Story"
     };

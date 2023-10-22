@@ -54,7 +54,7 @@ export class AltScenesListComponent {
 
 
   select(scene: IScene) {
-    console.log("Select event ",scene);
+    console.log("Select scene ",scene);
     this.storyService.updateCurrentDnScene(scene);
     this.scene$ = of(this.storyService.currentDnScene());
   }
