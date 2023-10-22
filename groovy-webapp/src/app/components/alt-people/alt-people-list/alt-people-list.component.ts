@@ -45,7 +45,8 @@ export class AltPeopleListComponent {
 
 
   delete(person: IPerson): void {
-
+    let idx: number = <number>this.storyService.currentDnStory().people?.findIndex(person => person.id == this.storyService.currentDnPerson().id);
+    this.storyService.currentDnStory().people?.splice(idx, 1);
   }
 
 

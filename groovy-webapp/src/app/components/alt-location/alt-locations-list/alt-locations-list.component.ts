@@ -45,7 +45,8 @@ export class AltLocationsListComponent {
 
 
   delete(location: ILocation): void {
-
+    let idx: number = <number>this.storyService.currentDnStory().locations?.findIndex(event => event.id == this.storyService.currentDnLocation().id);
+    this.storyService.currentDnStory().locations?.splice(idx, 1);
   }
 
 

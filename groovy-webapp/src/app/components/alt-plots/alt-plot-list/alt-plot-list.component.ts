@@ -50,7 +50,8 @@ export class AltPlotListComponent {
 
 
   delete(plot: IPlot): void {
-
+    let idx: number = <number>this.storyService.currentDnStory().plots?.findIndex(plot => plot.id == this.storyService.currentDnPlot().id);
+    this.storyService.currentDnStory().plots?.splice(idx, 1);
   }
 
 

@@ -45,7 +45,8 @@ export class AltThingsListComponent {
 
 
   delete(thing: IThing): void {
-
+    let idx: number = <number>this.storyService.currentDnStory().things?.findIndex(event => event.id == this.storyService.currentDnLocation().id);
+    this.storyService.currentDnStory().things?.splice(idx, 1);
   }
 
 

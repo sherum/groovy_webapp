@@ -46,7 +46,8 @@ export class AltEventsListComponent {
 
 
   delete(event: IEvent): void {
-
+    let idx: number = <number>this.storyService.currentDnStory().events?.findIndex(event => event.id == this.storyService.currentDnEvent().id);
+    this.storyService.currentDnStory().events?.splice(idx, 1);
   }
 
 

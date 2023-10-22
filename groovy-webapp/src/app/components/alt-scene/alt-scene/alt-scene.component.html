@@ -1,1 +1,24 @@
-<p>alt-scene works!</p>
+<form ngForm>
+    <a type="link" class="link-primary" (click)="save()">Add to Story</a>
+    <div class="col">
+
+        <div class="input-group mb-6">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="new-title">Name:</span>
+            </div>
+            <input class="form-control col-md-8" type="text" name="name" id="es-name" [(ngModel)]="scene.name"/>
+        </div>
+
+        <div class="row">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="new-description">Description:</span>
+                </div>
+                <textarea class="form-control" name="description" id="es-description" [(ngModel)]="scene.description"></textarea>
+            </div>
+        </div>
+
+    </div>
+</form>
+
+
